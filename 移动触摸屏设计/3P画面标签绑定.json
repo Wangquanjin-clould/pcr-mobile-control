@@ -1,0 +1,683 @@
+{
+  "controller": "Sailun_AJ_RU",
+  "source_file": "Sailun_AJ_RU.L5X",
+  "source_export_date": "Mon Oct 19 11:34:55 2026",
+  "channel": "3P",
+  "shares_controller_with": "1P",
+  "preview_only": true,
+  "bindings": [
+    {
+      "page": "设备选择",
+      "control": "手动链条1（同时作为查询对象）",
+      "tag": "HMI_Input_DeviceNo_3P_1",
+      "data_type": "STR20",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "原样传入编号；仅按STR20格式编码，不改写编号，不做APP端编号转换",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备选择",
+      "control": "手动链条1（同时作为查询对象）显示回读",
+      "tag": "HMI_DISPLAY_DeviceNo_3P_1",
+      "data_type": "STR20",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "PLC输入显示缓冲；该字符串被复制不等于设备已进入手动",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备选择",
+      "control": "手动链条1（同时作为查询对象）实际选择结果",
+      "tag": "AOI_HMI_ID_CHOOSE_3P.HMI_Man_No1",
+      "data_type": "DINT",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "DINT，全数字选择结果；由PLC写入，APP不直接写",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备选择",
+      "control": "手动链条2",
+      "tag": "HMI_Input_DeviceNo_3P_2",
+      "data_type": "STR20",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "原样传入编号；仅按STR20格式编码，不改写编号，不做APP端编号转换",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备选择",
+      "control": "手动链条2显示回读",
+      "tag": "HMI_DISPLAY_DeviceNo_3P_2",
+      "data_type": "STR20",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "PLC输入显示缓冲；该字符串被复制不等于设备已进入手动",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备选择",
+      "control": "手动链条2实际选择结果",
+      "tag": "AOI_HMI_ID_CHOOSE_3P.HMI_Man_No2",
+      "data_type": "DINT",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "DINT，全数字选择结果；由PLC写入，APP不直接写",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备选择",
+      "control": "禁用链条1编号",
+      "tag": "HMI_Input_DeviceNo_3P_3",
+      "data_type": "STR20",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "用户确认：禁用链条编号输入，与手动链条1/2分开；原样传入编号，禁用生效仍由PLC现有逻辑判断；第一版不实现解锁",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备选择",
+      "control": "禁用链条2编号",
+      "tag": "HMI_Input_DeviceNo_3P_4",
+      "data_type": "STR20",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "用户确认：禁用链条编号输入，与手动链条1/2分开；原样传入编号，禁用生效仍由PLC现有逻辑判断；第一版不实现解锁",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "手动操作",
+      "control": "手动请求",
+      "tag": "HMI_Manual_3P",
+      "data_type": "BOOL",
+      "ui_access": "RW",
+      "source_external_access": "Read/Write",
+      "semantics": "1=请求选中设备手动，0=撤销手动请求；当前设备实际状态另读SCADA状态字",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "手动操作",
+      "control": "C＋ / A→C",
+      "tag": "HMI_Manaul_AC_Fwd_3P",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "按下置1，松开/触摸取消/切页置0；只能单写该BOOL，不整组覆盖",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "手动操作",
+      "control": "A− / C→A",
+      "tag": "HMI_Manaul_AC_Rev_3P",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "按下置1，松开/触摸取消/切页置0；只能单写该BOOL，不整组覆盖",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "手动操作",
+      "control": "D＋ / B→D",
+      "tag": "HMI_Manaul_BD_Fwd_3P",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "按下置1，松开/触摸取消/切页置0；只能单写该BOOL，不整组覆盖",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "手动操作",
+      "control": "B− / D→B",
+      "tag": "HMI_Manaul_BD_Rev_3P",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "按下置1，松开/触摸取消/切页置0；只能单写该BOOL，不整组覆盖",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "手动操作",
+      "control": "上升",
+      "tag": "HMI_Manaul_Up_3P",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "按下置1，松开/触摸取消/切页置0；只能单写该BOOL，不整组覆盖",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "手动操作",
+      "control": "下降",
+      "tag": "HMI_Manaul_Dn_3P",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "按下置1，松开/触摸取消/切页置0；只能单写该BOOL，不整组覆盖",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "启停控制",
+      "control": "1P区域自动使能",
+      "tag": "AOI_HMI_OP_3P.HMI_Auto",
+      "data_type": "BOOL",
+      "ui_access": "RW",
+      "source_external_access": "Read/Write",
+      "semantics": "区域自动使能；不要与手动页自动按钮混为同一动作，后者实际绑定待确认",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "启停控制",
+      "control": "启动",
+      "tag": "HMI_3P_Start",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "瞬时请求；PLC以AOI_HMI_OP_1P.HMI_Start自保持，松开按钮不等于停止",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "启停控制",
+      "control": "停止",
+      "tag": "HMI_3P_Stop",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "停止请求，打断区域启动自保持；仅普通控制停止",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "启停控制",
+      "control": "复位",
+      "tag": "ISB_Rst_HMI_3P",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "瞬时请求，由R01_Auto_Manual_1P梯级4合入HMI_Reset",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "启停控制",
+      "control": "启动状态",
+      "tag": "AOI_HMI_OP_3P.HMI_Start",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "PLC计算后的区域启动状态，只读",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "启停控制",
+      "control": "手动请求状态",
+      "tag": "AOI_HMI_OP_3P.HMI_Man",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "由HMI_Manual_1P驱动的请求状态，不等于每台设备都处于手动",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "主画面",
+      "control": "区域许可状态",
+      "tag": "AOI_HMI_OP_3P.HMI_EM",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "由现场急停/许可链计算，仅显示，禁止由APP置1伪造许可",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "主画面",
+      "control": "P区报警提示",
+      "tag": "HMI_ZoneP1_Alarming",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "当前扫描发现的报警提示；不是所有报警历史列表",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "主画面",
+      "control": "Z5区报警提示",
+      "tag": "HMI_ZoneZ5_Alarming",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "当前扫描发现的报警提示；不是所有报警历史列表",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "主画面",
+      "control": "P区报警位置",
+      "tag": "HMI_Alarm_Location_Num_P1",
+      "data_type": "DINT",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "六位数字设备号",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "主画面",
+      "control": "Z5区报警位置",
+      "tag": "HMI_Alarm_Location_Num_Z5",
+      "data_type": "DINT",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "六位数字设备号",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "总错误",
+      "tag": "HMI_Status_Display_3P.HMI_fault",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "链条过载",
+      "tag": "HMI_Status_Display_3P.HMI_Fault_Link",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "升降过载",
+      "tag": "HMI_Status_Display_3P.HMI_Fault_UpDn",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "上限信号异常",
+      "tag": "HMI_Status_Display_3P.HMI_Fault_UpLim",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "下限信号异常",
+      "tag": "HMI_Status_Display_3P.HMI_Fault_DnLim",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "移载过载",
+      "tag": "HMI_Status_Display_3P.HMI_Fault_UpDn_Move",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "运转超时异常",
+      "tag": "HMI_Status_Display_3P.HMI_Fault_Run_TimeOut",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "进件中",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_In",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "出件中",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_Out",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "上升中",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_Up",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "下降中",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_Dn",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "上位开关",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_UpDn_At_Up",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "下位开关",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_UpDn_At_Dn",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "清进件状态",
+      "tag": "HMI_Status_Display_3P.HMI_Clr_In",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "瞬时清状态请求；PLC按已选设备转发。不是清除托盘数据，不强制设备输出",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "清出件状态",
+      "tag": "HMI_Status_Display_3P.HMI_Clr_Out",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "瞬时清状态请求；PLC按已选设备转发。不是清除托盘数据，不强制设备输出",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "减速位开关（带移载）",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_Slow_IPH",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "停止位开关（带移载）",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_Stop_IPH",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "有盘无数据",
+      "tag": "HMI_Status_Display_3P.HMI_Fault_HavePall_NoData",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "有数据无盘",
+      "tag": "HMI_Status_Display_3P.HMI_Fault_NoPall_HaveData",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "被禁用",
+      "tag": "HMI_Status_Display_3P.HMI_Fault_Forbid",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "托盘检测开关异常",
+      "tag": "HMI_Status_Display_3P.HMI_Fault_IPH_Err",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "入口光电（单链条）",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_In_IPH",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "出口光电（单链条）",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_Out_IPH",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "升降检测开关异常（带移载）",
+      "tag": "HMI_Status_Display_3P.HMI_Fault_IPX_Err",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=异常，显示“正常”时取反",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "提升机上出入口安全",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_Lift_Up_Safe",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "设备状态",
+      "control": "提升机下出入口安全",
+      "tag": "HMI_Status_Display_3P.HMI_Stus_Lift_Dn_Safe",
+      "data_type": "BOOL",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "1=该状态成立；没有被该设备AOI赋值的字段应隐藏或标记不适用",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "当前链条数字编号",
+      "tag": "HMI_PalletInfo_3P.Device",
+      "data_type": "DINT",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "当前查询缓冲中的设备编号",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "任务号",
+      "tag": "HMI_PalletInfo_3P.SerialNO",
+      "data_type": "DINT",
+      "ui_access": "RW",
+      "source_external_access": "Read/Write",
+      "semantics": "DINT，范围以PLC类型为准",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "源地址",
+      "tag": "HMI_PalletInfo_3P.Src_Device",
+      "data_type": "DINT",
+      "ui_access": "RW",
+      "source_external_access": "Read/Write",
+      "semantics": "DINT全数字地址，例如101029",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "目标地址",
+      "tag": "HMI_PalletInfo_3P.Dest_Device",
+      "data_type": "DINT",
+      "ui_access": "RW",
+      "source_external_access": "Read/Write",
+      "semantics": "DINT全数字地址，保留输入值交PLC判断",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "托盘号",
+      "tag": "HMI_PalletInfo_3P.PalletID",
+      "data_type": "STR20",
+      "ui_access": "RW",
+      "source_external_access": "Read/Write",
+      "semantics": "STR20，LEN为DINT，DATA为20个SINT；本机编辑后提交",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "外检状态",
+      "tag": "HMI_PalletInfo_3P.Height",
+      "data_type": "INT",
+      "ui_access": "RW",
+      "source_external_access": "Read/Write",
+      "semantics": "现有UDT定义1正常、2异常；与MajorState故障分类分开",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "重量kg",
+      "tag": "HMI_PalletInfo_3P.Weight",
+      "data_type": "REAL",
+      "ui_access": "RW",
+      "source_external_access": "Read/Write",
+      "semantics": "REAL，kg",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "托盘数量",
+      "tag": "HMI_PalletInfo_3P.PalletNum",
+      "data_type": "INT",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "INT，按设备用途显示",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "主异常状态",
+      "tag": "HMI_PalletInfo_3P.MajorState",
+      "data_type": "SINT",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "SINT；原定义2扫码、3称重、4外形异常",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "人工改写/清除标记",
+      "tag": "HMI_PalletInfo_3P.SubState",
+      "data_type": "SINT",
+      "ui_access": "R",
+      "source_external_access": "Read/Write",
+      "semantics": "bit0人工修改，bit1人工清除",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "停止/恢复数据刷新",
+      "tag": "HMI_MAN_DATA_Ref_3P",
+      "data_type": "BOOL",
+      "ui_access": "RW",
+      "source_external_access": "Read/Write",
+      "semantics": "1=停止PLC向HMI_PalletInfo_1P刷新，0=允许刷新；不控制设备停机",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "手动写入",
+      "tag": "HMI_PalletData_Chg_3P",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "停止刷新后写缓冲，再保持请求至PLC消费并自清；当前TON_1.PRE=1000ms，不是3000ms",
+      "status": "当前L5X已确认"
+    },
+    {
+      "page": "托盘数据",
+      "control": "手动清除",
+      "tag": "HMI_PalletData_Clr_3P",
+      "data_type": "BOOL",
+      "ui_access": "W",
+      "source_external_access": "Read/Write",
+      "semantics": "停止刷新后保持请求至PLC消费并自清；当前TON_2.PRE=1000ms，长按3秒需由APP本地先计时",
+      "status": "当前L5X已确认"
+    }
+  ],
+  "shared_status": {
+    "bit8": "1自动/0手动",
+    "P": "SCADA_P[1,n].DeviceStatus",
+    "bit10": "1有托盘",
+    "bit9": "1故障",
+    "Z5": "SCADA_Z5[n].DeviceStatus"
+  },
+  "gantry_data_owners": [
+    {
+      "control_owner": "P1004",
+      "device": "P1004",
+      "pallet_data": "SCADA_P[1,4]",
+      "wcs_station": "P1005",
+      "pair": "P1004/P1005"
+    },
+    {
+      "control_owner": "P1015",
+      "device": "P1015",
+      "pallet_data": "SCADA_P[1,15]",
+      "wcs_station": "P1016",
+      "pair": "P1015/P1016"
+    }
+  ]
+}

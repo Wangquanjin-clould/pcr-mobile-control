@@ -1,0 +1,5 @@
+# Preserve the archived source and generated HTML byte for byte.
+* -text
+mobile-control-app/gradlew text eol=lf
+*.apk binary
+*.jar binary

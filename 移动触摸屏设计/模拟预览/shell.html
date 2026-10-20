@@ -1,0 +1,28 @@
+<div id="pcr-stage">
+<div id="pcr-preview">
+  <div class="pcr-shell">
+    <aside class="pcr-side">
+      <div class="pcr-brand"><span class="pcr-mark">S</span><div>赛轮 PCR<small>移动操作终端</small></div></div>
+      <button class="pcr-plc" id="pcr-connection"><span class="pcr-dot"></span>入库 PLC <span>⌄</span><small id="pcr-channel-caption">3P 触摸屏 · 模拟连接</small></button>
+      <nav aria-label="主导航" id="pcr-nav"></nav>
+      <div class="pcr-side-bottom">半钢成品库<small>界面预览 · 模拟数据</small></div>
+    </aside>
+    <main class="pcr-main">
+      <header class="pcr-head">
+        <div><small id="pcr-subtitle">入库输送系统 / 3P</small><h2 id="pcr-title">设备布局</h2></div>
+        <div class="pcr-head-right"><div class="pcr-channel-tabs" role="group" aria-label="触摸屏通道"><button data-channel="1P" aria-pressed="false">1P</button><button data-channel="3P" aria-pressed="true">3P</button></div><span class="pcr-chip">● 模拟在线</span></div>
+      </header>
+      <div class="pcr-context"><label>主查询 / 手动链条 1 <input id="pcr-device" value="Z5009" maxlength="20" aria-label="主查询和手动链条1编号"></label><button id="pcr-query">选择设备</button><span id="pcr-selected">当前：Z5009</span></div>
+      <div id="pcr-content"></div>
+      <footer class="pcr-footer"><span id="pcr-channel-footer">3P 操作通道 · 共用入库 PLC</span><span id="pcr-feedback" role="status" aria-live="polite">模拟预览</span></footer>
+    </main>
+  </div>
+  <div class="pcr-modal" id="pcr-modal" hidden><section><div class="pcr-modal-title"><h3>选择 PLC / 触摸屏通道</h3><button id="pcr-close" aria-label="关闭">×</button></div><button class="pcr-plc-choice" id="pcr-inbound"><strong>入库 PLC</strong><span>1P 与 3P 共用同一台控制器</span><b>当前选择 · 模拟连接</b></button><div class="pcr-modal-channels"><button data-channel="1P">1P 触摸屏</button><button data-channel="3P">3P 触摸屏</button></div><button class="pcr-plc-choice" disabled><strong>出库 PLC 1</strong><span>预留接口</span></button><button class="pcr-plc-choice" disabled><strong>出库 PLC 2</strong><span>预留接口</span></button></section></div>
+  <section class="pcr-keyboard" id="pcr-keyboard" role="dialog" aria-modal="false" aria-labelledby="pcr-key-title" hidden>
+    <div class="pcr-key-head" id="pcr-key-handle"><div><strong id="pcr-key-title">输入设备编号</strong><small>拖动此处移动键盘</small></div><button id="pcr-key-close" aria-label="关闭悬浮键盘">×</button></div>
+    <div class="pcr-key-display"><output id="pcr-key-value" aria-live="polite"></output><span id="pcr-key-count"></span></div>
+    <div class="pcr-key-keys" id="pcr-key-keys"></div>
+    <div class="pcr-key-actions"><button data-key-action="clear">清空</button><button data-key-action="backspace">退格 ⌫</button><button data-key-action="cancel">取消</button><button class="pcr-primary" data-key-action="confirm">确认</button></div>
+  </section>
+</div>
+</div>

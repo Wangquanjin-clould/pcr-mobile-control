@@ -1,0 +1,459 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><style>html,body{margin:0;background:#eef3f9;overflow:hidden;touch-action:manipulation}
+#pcr-preview{--p-bg:light-dark(#f2f5fa,#121a26);--p-panel:light-dark(#ffffff,#1c2838);--p-text:light-dark(#182940,#e4edf8);--p-muted:light-dark(#607189,#a3b3c9);--p-line:light-dark(#dce4ee,#35455c);--p-blue:light-dark(#195ddc,#8ab2ff);--p-soft:light-dark(#eaf1ff,#283e60);--p-good:light-dark(#17734e,#72d6a8);--p-green:light-dark(#e9f6ee,#203c33);--p-bad:light-dark(#b43b3b,#ffaaaa);--p-red:light-dark(#fff0ed,#492c30);--p-nav:#12243a;--p-nav-text:#edf3ff;--p-nav-muted:#a8b8cf;--p-radius:14px;font:16px/1.5 "Microsoft YaHei","Noto Sans SC",sans-serif;color:var(--p-text);position:relative}
+#pcr-preview *{box-sizing:border-box}#pcr-preview button,#pcr-preview input,#pcr-preview select{font:inherit}#pcr-preview button{min-height:46px;border:1px solid var(--p-line);background:var(--p-panel);color:var(--p-text);border-radius:9px;padding:10px 16px;touch-action:manipulation}#pcr-preview button:hover{background:var(--p-soft)}#pcr-preview button:disabled{opacity:.45}#pcr-preview input{min-height:46px;min-width:0;width:100%;padding:9px 12px;border:1px solid var(--p-line);border-radius:8px;background:var(--p-panel);color:var(--p-text)}#pcr-preview h2,#pcr-preview h3,#pcr-preview p{margin:0}#pcr-preview h2{font-size:24px;font-weight:500}#pcr-preview h3{font-size:18px;font-weight:500}#pcr-preview small{font-size:12px;color:var(--p-muted)}#pcr-preview strong,#pcr-preview b{font-weight:500}#pcr-preview .pcr-shell{display:grid;grid-template-columns:136px minmax(0,1fr);min-height:690px;background:var(--p-bg);border-radius:16px;overflow:hidden;border:1px solid var(--p-line)}
+#pcr-preview .pcr-side{background:var(--p-nav);color:var(--p-nav-text);display:flex;flex-direction:column;padding:25px 12px 20px;gap:25px}#pcr-preview .pcr-brand{display:flex;align-items:center;gap:10px;padding:0 8px;font-weight:500}#pcr-preview .pcr-brand small,#pcr-preview .pcr-side-bottom small{display:block;color:var(--p-nav-muted);margin-top:3px}#pcr-preview .pcr-mark{display:grid;place-items:center;background:#397bf0;color:#fff;width:32px;height:36px;border-radius:9px;font-size:23px}#pcr-preview .pcr-plc{position:relative;background:#20364f;color:var(--p-nav-text);border-color:#36506d;text-align:left;padding:12px}#pcr-preview .pcr-plc small{display:block;color:var(--p-nav-muted);margin-top:6px}#pcr-preview .pcr-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#72d6a8;margin-right:7px}#pcr-preview nav{display:grid;gap:8px}#pcr-preview nav button{display:flex;gap:12px;align-items:center;background:transparent;color:var(--p-nav-muted);border:0;text-align:left;min-height:52px}#pcr-preview nav button[aria-current="page"]{background:#285cc0;color:#fff}#pcr-preview nav svg{width:19px;height:19px}#pcr-preview .pcr-side-bottom{margin-top:auto;padding-left:12px;font-size:13px}
+#pcr-preview .pcr-main{min-width:0;display:flex;flex-direction:column;padding:25px 24px 14px;gap:18px}#pcr-preview .pcr-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding-right:65px}#pcr-preview .pcr-head h2{margin-top:3px}#pcr-preview .pcr-head-right{display:flex;gap:15px;align-items:center;font-size:12px;white-space:nowrap}#pcr-preview .pcr-chip{display:inline-flex;align-items:center;background:var(--p-green);color:var(--p-good);padding:5px 9px;border-radius:20px;font-size:12px}#pcr-preview .pcr-context{display:flex;gap:12px;align-items:flex-end;padding:15px 18px;background:var(--p-panel);border:1px solid var(--p-line);border-radius:var(--p-radius)}#pcr-preview .pcr-context label{display:flex;gap:14px;align-items:center;font-size:13px;flex:1}#pcr-preview .pcr-context input{max-width:145px;font-weight:500;letter-spacing:1px}#pcr-preview .pcr-context>span{font-size:12px;color:var(--p-muted);align-self:center;white-space:nowrap}#pcr-preview #pcr-content{flex:1;min-width:0}#pcr-preview .pcr-footer{display:flex;justify-content:space-between;gap:12px;color:var(--p-muted);font-size:12px;border-top:1px solid var(--p-line);padding-top:11px}#pcr-preview .pcr-panel{border:1px solid var(--p-line);background:var(--p-panel);border-radius:var(--p-radius);padding:20px}#pcr-preview .pcr-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}#pcr-preview .pcr-caption{color:var(--p-muted);font-size:13px;margin-top:5px}#pcr-preview .pcr-primary{background:var(--p-blue);color:light-dark(#fff,#142338);border-color:transparent}#pcr-preview .pcr-danger{background:var(--p-red);color:var(--p-bad)}#pcr-preview .pcr-actions{display:flex;gap:10px;flex-wrap:wrap}#pcr-preview .pcr-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}#pcr-preview .pcr-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px}#pcr-preview .pcr-summary .pcr-panel{padding:18px}#pcr-preview .pcr-big{font-size:25px;margin-top:7px}#pcr-preview .pcr-items{display:grid;gap:0;margin-top:16px}#pcr-preview .pcr-items>div{display:flex;justify-content:space-between;gap:15px;padding:12px 0;border-top:1px solid var(--p-line)}#pcr-preview .pcr-items>div span:first-child{color:var(--p-muted)}
+#pcr-preview .pcr-tabs{display:flex;gap:8px;flex-wrap:wrap}#pcr-preview .pcr-tabs button{font-size:13px;min-height:40px;padding:6px 12px}#pcr-preview .pcr-tabs button[aria-pressed="true"]{background:var(--p-soft);color:var(--p-blue);border-color:var(--p-blue)}#pcr-preview .pcr-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:20px}#pcr-preview .pcr-lane{display:grid;grid-template-columns:1fr 24px 1fr;gap:8px;align-items:center}#pcr-preview .pcr-rack{grid-column:2;grid-row:1/4;align-self:stretch;display:grid;place-items:center;border-radius:6px;background:var(--p-bg);color:var(--p-muted);writing-mode:vertical-rl;font-size:12px}#pcr-preview .pcr-node{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;padding:7px 4px;min-height:62px;background:var(--p-green);border:1px solid var(--p-line);border-radius:7px;font-size:12px}#pcr-preview .pcr-node.selected{border:2px solid var(--p-blue);background:var(--p-soft)}#pcr-preview .pcr-node em{font-style:normal;color:var(--p-good);font-size:12px}#pcr-preview .pcr-node .pcr-arrow{color:var(--p-muted);font-size:19px}#pcr-preview .pcr-track{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:5px;margin-top:16px}#pcr-preview .pcr-track .pcr-node{font-size:11px}#pcr-preview .pcr-map-bottom{margin-top:20px;padding-top:16px;border-top:1px solid var(--p-line)}#pcr-preview .pcr-legend{font-size:12px;color:var(--p-muted);display:flex;gap:15px;flex-wrap:wrap}
+#pcr-preview .pcr-man-top{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:16px}#pcr-preview .pcr-man-top label{font-size:13px;color:var(--p-muted)}#pcr-preview .pcr-man-top input{margin-top:6px}#pcr-preview .pcr-jog{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}#pcr-preview .pcr-jog button{min-height:76px;font-size:19px;background:var(--p-bg);user-select:none;touch-action:none}#pcr-preview .pcr-jog button small{display:block;font-size:12px}#pcr-preview .pcr-jog button.pressed{background:var(--p-blue);color:light-dark(#fff,#142338)}#pcr-preview .pcr-jog button.pressed small{color:inherit}#pcr-preview .pcr-jog .pcr-jog-center{display:grid;place-items:center;text-align:center;font-size:13px;color:var(--p-muted)}#pcr-preview .pcr-state-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}#pcr-preview .pcr-state{background:var(--p-bg);border-radius:9px;padding:14px;font-size:13px}#pcr-preview .pcr-state b{display:block;margin-top:7px;color:var(--p-good)}#pcr-preview .pcr-state.inactive b{color:var(--p-muted)}#pcr-preview .pcr-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}#pcr-preview .pcr-fields label{font-size:13px;color:var(--p-muted)}#pcr-preview .pcr-fields input{margin-top:6px}#pcr-preview .pcr-data-actions{display:grid;gap:12px;align-content:start}#pcr-preview .pcr-data-actions button{min-height:58px}#pcr-preview .pcr-note{font-size:13px;color:var(--p-muted);padding-top:12px}#pcr-preview .pcr-run-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}#pcr-preview .pcr-run-buttons button{min-height:100px;font-size:21px}#pcr-preview .pcr-modal{position:absolute;inset:0;background:#08142699;display:grid;place-items:center;z-index:10;padding:20px}#pcr-preview .pcr-modal[hidden]{display:none}#pcr-preview .pcr-modal section{width:min(460px,100%);background:var(--p-panel);border-radius:18px;padding:24px;box-shadow:0 18px 70px #0004}#pcr-preview .pcr-modal-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}#pcr-preview .pcr-plc-choice{display:grid;gap:6px;width:100%;text-align:left;margin-top:12px;padding:17px}#pcr-preview .pcr-plc-choice span{font-size:13px;color:var(--p-muted)}#pcr-preview .pcr-plc-choice b{color:var(--p-blue);font-size:12px}
+@media(min-width:1150px){#pcr-preview .pcr-shell{min-height:780px}#pcr-preview .pcr-main{padding:30px;gap:22px}#pcr-preview .pcr-jog button{min-height:95px}#pcr-preview .pcr-node{min-height:77px}}
+@media(max-width:760px){#pcr-preview .pcr-shell{grid-template-columns:132px 1fr}#pcr-preview .pcr-main{padding:16px 12px}#pcr-preview .pcr-side{padding:20px 7px}#pcr-preview .pcr-brand{padding:0;font-size:14px}#pcr-preview .pcr-mark{display:none}#pcr-preview nav button{padding:9px;font-size:14px;gap:8px}#pcr-preview .pcr-head{padding-right:0}#pcr-preview .pcr-head-right{display:none}#pcr-preview .pcr-context{flex-wrap:wrap;padding:12px}#pcr-preview .pcr-context label{flex-wrap:wrap;gap:5px}#pcr-preview .pcr-context>span{display:none}#pcr-preview .pcr-grid,#pcr-preview .pcr-summary{grid-template-columns:1fr}#pcr-preview .pcr-map{gap:8px}#pcr-preview .pcr-lane{gap:4px;grid-template-columns:1fr 15px 1fr}#pcr-preview .pcr-track{grid-template-columns:repeat(5,1fr)}#pcr-preview .pcr-panel{padding:14px}#pcr-preview .pcr-state-grid{grid-template-columns:1fr 1fr}#pcr-preview .pcr-footer>span:first-child{display:none}}
+@media(max-width:460px){#pcr-preview .pcr-shell{grid-template-columns:1fr}#pcr-preview .pcr-side{padding:12px;gap:10px}#pcr-preview .pcr-brand,#pcr-preview .pcr-side-bottom{display:none}#pcr-preview nav{grid-template-columns:repeat(3,1fr);gap:4px}#pcr-preview nav button{justify-content:center;font-size:12px;min-height:44px;padding:5px}#pcr-preview nav svg{display:none}#pcr-preview .pcr-plc{padding:8px}#pcr-preview .pcr-plc small{display:inline;margin-left:10px}#pcr-preview .pcr-map{grid-template-columns:1fr}#pcr-preview .pcr-lane{grid-template-columns:1fr 25px 1fr}#pcr-preview .pcr-man-top,#pcr-preview .pcr-fields{grid-template-columns:1fr}#pcr-preview .pcr-run-buttons{grid-template-columns:1fr}}
+#pcr-preview .pcr-keyboard{position:absolute;z-index:20;width:min(554px,calc(100% - 24px));right:18px;bottom:38px;background:var(--p-panel);border:1px solid var(--p-line);border-radius:16px;padding:14px;box-shadow:0 16px 65px #0005;touch-action:manipulation}#pcr-preview .pcr-keyboard[hidden]{display:none}#pcr-preview .pcr-key-head{display:flex;justify-content:space-between;align-items:center;gap:12px;touch-action:none;user-select:none;padding-bottom:10px}#pcr-preview .pcr-key-head small{display:block;margin-top:2px}#pcr-preview .pcr-key-head button{min-width:46px}#pcr-preview .pcr-key-display{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:54px;background:var(--p-bg);border:1px solid var(--p-blue);border-radius:9px;margin-bottom:12px;padding:10px 12px}#pcr-preview .pcr-key-display output{font-size:22px;letter-spacing:1px;overflow-wrap:anywhere;min-width:0}#pcr-preview .pcr-key-display span{font-size:12px;color:var(--p-muted);white-space:nowrap}#pcr-preview .pcr-key-keys{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:5px}#pcr-preview .pcr-key-keys.numeric{grid-template-columns:repeat(3,minmax(0,1fr))}#pcr-preview .pcr-key-keys button{padding:7px 0;min-height:46px;font-size:18px;background:var(--p-bg)}#pcr-preview .pcr-key-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}#pcr-preview .pcr-key-actions button{padding:8px 3px;font-size:14px}#pcr-preview input[data-vk-enabled="true"]{caret-color:transparent}#pcr-preview input[data-vk-active="true"]{border-color:var(--p-blue);background:var(--p-soft)}#pcr-preview .pcr-keyboard.numeric{width:min(360px,calc(100% - 24px))}@media(max-width:600px){#pcr-preview .pcr-key-keys{grid-template-columns:repeat(6,minmax(0,1fr))}#pcr-preview .pcr-keyboard{right:12px;bottom:18px}#pcr-preview .pcr-key-head small{display:none}}
+#pcr-preview[data-layout="true"] .pcr-main{padding:16px 18px 12px;gap:12px}#pcr-preview[data-layout="true"] .pcr-context{padding:8px 12px}#pcr-preview .pcr-layout-panel{padding:12px}#pcr-preview .pcr-topology{position:relative;height:354px;margin-top:12px}#pcr-preview .pcr-machine{position:absolute;height:44px;min-height:44px;min-width:0;padding:2px 0;border-radius:5px;background:var(--p-panel);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;z-index:2;touch-action:manipulation}#pcr-preview .pcr-machine strong{font-size:11px;white-space:nowrap;line-height:17px}#pcr-preview .pcr-machine .pcr-flow{color:var(--p-blue);font-size:18px;line-height:21px;white-space:nowrap}#pcr-preview .pcr-machine.selected{border:2px solid var(--p-blue);background:var(--p-soft)}#pcr-preview .pcr-machine.buffer{background:var(--p-bg)}#pcr-preview .pcr-status-dot{position:absolute;left:3px;bottom:3px;width:5px;height:5px;background:var(--p-good);border-radius:50%}#pcr-preview .pcr-wire{position:absolute;background:var(--p-line);z-index:0}#pcr-preview .pcr-wire.horizontal{height:2px}#pcr-preview .pcr-wire.vertical{width:2px}#pcr-preview .pcr-wire span{position:absolute;top:50%;left:-7px;transform:translateY(-50%);background:var(--p-bg);color:var(--p-blue);font-size:18px;line-height:24px}#pcr-preview .pcr-srm{position:absolute;display:flex;align-items:center;justify-content:center;gap:7px;width:24px;background:var(--p-bg);border:1px solid var(--p-line);border-radius:5px;writing-mode:vertical-rl;color:var(--p-muted);font-size:12px}#pcr-preview .pcr-srm span{font-size:11px}#pcr-preview .pcr-track-caption{position:absolute;left:0;font-size:11px;color:var(--p-muted);background:var(--p-panel);z-index:1}#pcr-preview .pcr-port{position:absolute;left:0;font-size:11px;color:var(--p-muted)}#pcr-preview .pcr-port.upper{top:8px}#pcr-preview .pcr-port.lower{top:29px}#pcr-preview .pcr-boundary{position:absolute;min-height:30px;padding:3px 6px;font-size:11px;color:var(--p-blue);border:0;background:transparent}#pcr-preview .pcr-boundary.top{left:0;top:226px}#pcr-preview .pcr-boundary.bottom{left:0;top:324px}#pcr-preview .pcr-boundary.right-top{right:0;top:226px}#pcr-preview .pcr-boundary.right-bottom{right:0;top:324px}#pcr-preview .pcr-tail{position:absolute;right:0;top:328px;font-size:11px;color:var(--p-blue)}#pcr-preview .pcr-layout-panel .pcr-map-bottom{margin-top:4px;padding-top:10px}#pcr-preview .pcr-legend-direction{color:var(--p-blue)}#pcr-preview .pcr-mobile-topology{display:none}
+@media(max-width:900px) and (min-width:601px){#pcr-preview[data-layout="true"] .pcr-shell{grid-template-columns:64px minmax(0,1fr)}#pcr-preview[data-layout="true"] .pcr-side{padding:20px 6px}#pcr-preview[data-layout="true"] .pcr-brand,#pcr-preview[data-layout="true"] .pcr-plc,#pcr-preview[data-layout="true"] .pcr-side-bottom{display:none}#pcr-preview[data-layout="true"] nav button{font-size:0;justify-content:center;padding:12px}#pcr-preview[data-layout="true"] nav svg{display:block;width:20px;height:20px}}
+@media(max-width:600px){#pcr-preview .pcr-topology{display:none}#pcr-preview .pcr-mobile-topology{display:block;margin-top:18px}#pcr-preview .pcr-mini-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:10px 0 20px}#pcr-preview .pcr-mobile-topology h3{margin-top:16px}#pcr-preview .pcr-mobile-topology p{font-size:12px;overflow-wrap:anywhere}}
+#pcr-preview .pcr-machine-inner{position:absolute;left:0;right:0;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center}#pcr-preview .pcr-machine.dock-upper{border-bottom-left-radius:0;border-bottom-right-radius:0}#pcr-preview .pcr-machine.dock-lower{border-top-left-radius:0;border-top-right-radius:0}
+#pcr-preview .pcr-boundary.top,#pcr-preview .pcr-boundary.right-top{display:none}
+#pcr-preview .pcr-dock-flow{position:absolute;left:0;right:0;height:24px;color:var(--p-blue);font-size:22px;line-height:24px;text-align:center;pointer-events:none}#pcr-preview .dock-upper .pcr-dock-flow{bottom:1px}#pcr-preview .dock-lower .pcr-dock-flow{top:1px}
+#pcr-preview .pcr-brand{padding:0;gap:7px;font-size:14px}#pcr-preview .pcr-brand small{font-size:11px}#pcr-preview nav button{padding:10px 7px;gap:8px;font-size:15px;white-space:nowrap}#pcr-preview nav svg{width:18px;height:18px;flex-shrink:0}#pcr-preview .pcr-side-bottom{padding-left:6px}#pcr-preview .pcr-plc{padding:10px 8px;font-size:14px}#pcr-preview .pcr-plc small{font-size:11px}
+@media(max-width:900px) and (min-width:601px){#pcr-preview[data-layout="true"] nav button{font-size:0}}@media(max-width:460px){#pcr-preview nav button{font-size:12px;padding:5px;gap:4px}}
+#pcr-stage{width:100%;position:relative;overflow:hidden}#pcr-preview{width:1280px;height:800px;transform-origin:top left}#pcr-preview .pcr-shell{width:1280px;height:800px;min-height:800px;max-height:800px;grid-template-columns:136px minmax(0,1fr)}#pcr-preview .pcr-side{padding:25px 12px 20px;gap:25px}#pcr-preview .pcr-brand{display:flex}#pcr-preview .pcr-plc{display:block}#pcr-preview .pcr-side-bottom{display:block}#pcr-preview nav{grid-template-columns:1fr;gap:8px}#pcr-preview nav button{justify-content:flex-start;font-size:15px;min-height:52px;padding:10px 7px;gap:8px}#pcr-preview nav svg{display:block;width:18px;height:18px}#pcr-preview .pcr-main{padding:20px;gap:12px;min-height:0}#pcr-preview .pcr-head{min-height:52px;padding-right:65px}#pcr-preview .pcr-head-right{display:flex}#pcr-preview .pcr-context{padding:8px 12px;flex-wrap:nowrap}#pcr-preview .pcr-context label{flex-wrap:nowrap;gap:14px}#pcr-preview .pcr-context>span{display:inline}#pcr-preview #pcr-content{min-height:0}#pcr-preview .pcr-grid,#pcr-preview .pcr-man-top,#pcr-preview .pcr-fields{grid-template-columns:1fr 1fr}#pcr-preview .pcr-summary{grid-template-columns:repeat(3,1fr)}#pcr-preview .pcr-state-grid{grid-template-columns:repeat(3,1fr)}#pcr-preview .pcr-jog button{min-height:68px}#pcr-preview .pcr-run-buttons{grid-template-columns:repeat(3,1fr)}#pcr-preview .pcr-panel{padding:20px}#pcr-preview .pcr-layout-panel{padding:12px}#pcr-preview .pcr-footer>span:first-child{display:inline}#pcr-preview .pcr-topology{display:block}#pcr-preview .pcr-mobile-topology{display:none}#pcr-preview[data-layout="true"] .pcr-shell{grid-template-columns:136px minmax(0,1fr)}#pcr-preview[data-layout="true"] .pcr-side{padding:25px 12px 20px}#pcr-preview[data-layout="true"] .pcr-brand{display:flex}#pcr-preview[data-layout="true"] .pcr-plc,#pcr-preview[data-layout="true"] .pcr-side-bottom{display:block}#pcr-preview[data-layout="true"] nav button{font-size:15px;padding:10px 7px;justify-content:flex-start}#pcr-preview .pcr-keyboard{width:554px;right:18px;bottom:38px}#pcr-preview .pcr-keyboard.numeric{width:360px}#pcr-preview .pcr-key-keys{grid-template-columns:repeat(10,minmax(0,1fr))}#pcr-preview .pcr-key-keys.numeric{grid-template-columns:repeat(3,minmax(0,1fr))}#pcr-preview .pcr-key-head small{display:block}
+#pcr-preview .pcr-machine.mode-auto{--p-machine-fill:#ffffff}#pcr-preview .pcr-machine.mode-manual{--p-machine-fill:#c9a34a}#pcr-preview .pcr-machine.mode-fault{--p-machine-fill:#e65757}#pcr-preview .pcr-machine,#pcr-preview .pcr-machine:hover,#pcr-preview .pcr-machine.selected{background:var(--p-machine-fill,#fff);color:#182940}#pcr-preview .pcr-machine.selected{border-color:#195ddc;box-shadow:0 0 0 1px #195ddc}#pcr-preview .pcr-machine .pcr-flow,#pcr-preview .pcr-machine .pcr-dock-flow{color:#064ac5}#pcr-preview .pcr-status-dot{width:8px;height:8px;border:1.5px solid #157c3d;background:transparent}#pcr-preview .pcr-status-dot.loaded{background:#157c3d}#pcr-preview .pcr-legend{gap:10px}#pcr-preview .pcr-legend>span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}#pcr-preview .pcr-status-swatch{display:inline-block;width:12px;height:12px;border:1px solid var(--p-line);border-radius:2px}#pcr-preview .pcr-status-swatch.auto{background:#fff}#pcr-preview .pcr-status-swatch.manual{background:#c9a34a}#pcr-preview .pcr-status-swatch.fault{background:#e65757}#pcr-preview .pcr-pallet-key{display:inline-block;width:9px;height:9px;border:1.5px solid #157c3d;border-radius:50%;background:transparent}#pcr-preview .pcr-pallet-key.filled{background:#157c3d}
+#pcr-preview .pcr-machine.mode-auto,#pcr-preview .pcr-machine.mode-manual,#pcr-preview .pcr-machine.mode-fault{background:var(--p-machine-fill);color:#182940}
+#pcr-preview .pcr-keyboard.compact{padding:12px}#pcr-preview .pcr-keyboard.compact .pcr-key-head{padding-bottom:8px}#pcr-preview .pcr-keyboard.compact .pcr-key-head small{display:none}#pcr-preview .pcr-keyboard.compact .pcr-key-head button{min-height:44px;height:44px;padding:6px}#pcr-preview .pcr-keyboard.compact .pcr-key-display{min-height:44px;margin-bottom:8px;padding:6px 12px}#pcr-preview .pcr-keyboard.compact .pcr-key-keys button{min-height:44px;height:44px;padding:5px 0}#pcr-preview .pcr-keyboard.compact .pcr-key-actions{margin-top:8px}#pcr-preview .pcr-keyboard.compact .pcr-key-actions button{min-height:44px;height:44px;padding:6px 3px}
+
+#pcr-preview .pcr-channel-tabs{display:flex;gap:3px;padding:3px;background:var(--p-bg);border:1px solid var(--p-line);border-radius:11px}
+#pcr-preview .pcr-channel-tabs button{min-height:36px;padding:5px 16px;border:0;background:transparent}
+#pcr-preview .pcr-channel-tabs button[aria-pressed="true"]{background:var(--p-blue);color:light-dark(#fff,#142338)}
+#pcr-preview .pcr-head{padding-right:12px}
+#pcr-preview .pcr-modal-channels{display:flex;gap:10px;margin-top:12px}
+#pcr-preview .pcr-modal-channels button{flex:1}
+#pcr-preview .pcr-handoff{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:64px;padding:2px 0;border:0;background:transparent;color:var(--p-blue);font-size:11px}
+#pcr-preview .pcr-handoff strong{font-size:11px;font-weight:500}
+#pcr-preview .pcr-handoff span{font-size:21px;line-height:23px}
+#pcr-preview .pcr-handoff small{font-size:11px;color:var(--p-muted)}
+#pcr-preview .pcr-topology.has-branches{height:386px}
+#pcr-preview .pcr-branch-label{position:absolute;font-size:11px;line-height:18px;color:var(--p-muted);white-space:nowrap;text-align:right;transform:translateX(-100%)}
+#pcr-preview .pcr-branch-label.inbound{text-align:left;transform:none}
+#pcr-preview .pcr-port-info{position:absolute;display:flex;flex-direction:column;gap:2px;font-size:11px;color:var(--p-muted);white-space:nowrap}
+#pcr-preview .pcr-port-info strong{font-weight:500;color:var(--p-blue)}
+#pcr-preview .pcr-machine.review-node{outline:1px dashed var(--p-muted);outline-offset:2px}
+#pcr-preview .pcr-review-note{font-size:11px;line-height:16px;color:var(--p-muted);margin:0}
+#pcr-preview .pcr-state-panel{height:100%;min-height:0;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+#pcr-preview .pcr-state-panel>.pcr-row{flex-shrink:0}
+#pcr-preview .pcr-state-panel .pcr-state-grid{flex:1;min-height:0;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:10px;margin-top:0}
+#pcr-preview .pcr-state-panel .pcr-state{min-width:0;min-height:0;padding:10px 14px;display:flex;flex-direction:column;justify-content:center}
+#pcr-preview .pcr-state-actions{flex-shrink:0;margin-top:0;gap:12px}
+#pcr-preview .pcr-state-actions button{min-height:48px}
+#pcr-preview .pcr-map-bottom{flex-wrap:nowrap;gap:12px}
+#pcr-preview .pcr-map-bottom .pcr-legend{flex:1;min-width:0;flex-wrap:wrap;gap:7px}
+#pcr-preview .pcr-map-bottom .pcr-actions{flex-shrink:0}
+#pcr-preview .pcr-footer #pcr-feedback{max-width:70%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#pcr-preview input:disabled{opacity:.65}
+#pcr-preview .pcr-manual-grid .pcr-jog{gap:8px;margin-top:10px}
+#pcr-preview .pcr-manual-grid .pcr-jog button{min-height:60px}
+#pcr-preview .pcr-manual-grid .pcr-man-top{margin-bottom:8px}
+#pcr-preview .pcr-state.fault b{color:var(--p-bad)}
+
+.mode-unknown{background:#edf1f5!important}.pcr-state.fault{background:#fee2e2;color:#b91c1c}.pcr-nav-icon{display:inline-block;width:22px}button:disabled{opacity:.45}</style></head><body><div id="pcr-stage">
+<div id="pcr-preview">
+  <div class="pcr-shell">
+    <aside class="pcr-side">
+      <div class="pcr-brand"><span class="pcr-mark">S</span><div>赛轮 PCR<small>移动操作终端</small></div></div>
+      <button class="pcr-plc" id="pcr-connection"><span class="pcr-dot"></span>入库 PLC <span>⌄</span><small id="pcr-channel-caption">3P 触摸屏 · 192.168.41.129</small></button>
+      <nav aria-label="主导航" id="pcr-nav"></nav>
+      <div class="pcr-side-bottom">半钢成品库<small>PLC 在线调试</small></div>
+    </aside>
+    <main class="pcr-main">
+      <header class="pcr-head">
+        <div><small id="pcr-subtitle">入库输送系统 / 3P</small><h2 id="pcr-title">设备布局</h2></div>
+        <div class="pcr-head-right"><div class="pcr-channel-tabs" role="group" aria-label="触摸屏通道"><button data-channel="1P" aria-pressed="false">1P</button><button data-channel="3P" aria-pressed="true">3P</button></div><span class="pcr-chip">● PLC未连接</span></div>
+      </header>
+      <div class="pcr-context"><label>主查询 / 手动链条 1 <input id="pcr-device" value="Z5009" maxlength="20" aria-label="主查询和手动链条1编号"></label><button id="pcr-query">选择设备</button><span id="pcr-selected">当前：Z5009</span></div>
+      <div id="pcr-content"></div>
+      <footer class="pcr-footer"><span id="pcr-channel-footer">3P 操作通道 · 共用入库 PLC</span><span id="pcr-feedback" role="status" aria-live="polite">等待连接 PLC</span></footer>
+    </main>
+  </div>
+  <div class="pcr-modal" id="pcr-modal" hidden><section><div class="pcr-modal-title"><h3>选择 PLC / 触摸屏通道</h3><button id="pcr-close" aria-label="关闭">×</button></div><button class="pcr-plc-choice" id="pcr-inbound"><strong>入库 PLC</strong><span>1P 与 3P 共用同一台控制器</span><b>当前选择 · 192.168.41.129</b></button><div class="pcr-modal-channels"><button data-channel="1P">1P 触摸屏</button><button data-channel="3P">3P 触摸屏</button></div><button class="pcr-plc-choice" disabled><strong>出库 PLC 1</strong><span>预留接口</span></button><button class="pcr-plc-choice" disabled><strong>出库 PLC 2</strong><span>预留接口</span></button></section></div>
+  <section class="pcr-keyboard" id="pcr-keyboard" role="dialog" aria-modal="false" aria-labelledby="pcr-key-title" hidden>
+    <div class="pcr-key-head" id="pcr-key-handle"><div><strong id="pcr-key-title">输入设备编号</strong><small>拖动此处移动键盘</small></div><button id="pcr-key-close" aria-label="关闭悬浮键盘">×</button></div>
+    <div class="pcr-key-display"><output id="pcr-key-value" aria-live="polite"></output><span id="pcr-key-count"></span></div>
+    <div class="pcr-key-keys" id="pcr-key-keys"></div>
+    <div class="pcr-key-actions"><button data-key-action="clear">清空</button><button data-key-action="backspace">退格 ⌫</button><button data-key-action="cancel">取消</button><button class="pcr-primary" data-key-action="confirm">确认</button></div>
+  </section>
+</div>
+</div>
+<script>const PCR_LAYOUTS={"1P":[{"title":"巷道 101–103","cols":17,"upper":["P1124","P1025","P1125","P1031","P1126","P1127","P1035","P1128","P1041","P1129","P1130","P1047","P1131","P1051","P1132","P1133","P1055"],"lower":["P1103","P1027","P1104","P1105","P1106","P1037","P1107","P1043","P1108","P1109","P1110","P1053","P1111","P1112","P1057"],"lowerX":[0,1,2.15,3.45,4.75,6,7,8,9.15,10.45,11.75,13,14,15,16],"racks":[{"id":101,"left":1,"right":3,"out":["P1023","P1024"],"in":["P1029","P1030","P1145"]},{"id":102,"left":6,"right":8,"out":["P1033","P1034"],"in":["P1039","P1040"]},{"id":103,"left":11,"right":13,"out":["P1045","P1046","P1146"],"in":["P1049","P1050"]}],"vertical":[["P1025","P1027","↓"],["P1035","P1037","↓"],["P1043","P1041","↑"],["P1053","P1051","↑"],["P1055","P1057","↓"]],"turns":{"P1124":"↔","P1103":"↔","P1025":"← ↓ →","P1027":"↔","P1031":"← ↑","P1035":"← ↓","P1037":"→","P1041":"← ↑","P1043":"↑ →","P1047":"← ↓","P1051":"← ↑","P1053":"↑ →","P1055":"← ↓","P1057":"↓ →"},"extra":{"col":16,"ids":["P3248","P3249","P3250","P3251"],"direction":"↓"},"ports":true},{"title":"巷道 104–106","cols":15,"upper":["P1134","P1061","P1135","P1067","P1136","P1137","P1073","P1138","P1079","P1139","P1140","P1085","P1141","P1089","P1142"],"lower":["P1113","P1063","P1114","P1069","P1115","P1116","P1075","P1117","P1081","P1118","P1119","P1120","P1091","P1121"],"lowerX":[0,1,2,3,4,5,6,7,8,9.15,10.45,11.75,13,14],"racks":[{"id":104,"left":1,"right":3,"out":["P1059","P1060"],"in":["P1065","P1066"]},{"id":105,"left":6,"right":8,"out":["P1071","P1072"],"in":["P1077","P1078"]},{"id":106,"left":11,"right":13,"out":["P1083","P1084","P1147"],"in":["P1087","P1088"]}],"vertical":[["P1061","P1063","↓"],["P1069","P1067","↑"],["P1073","P1075","↓"],["P1081","P1079","↑"],["P1091","P1089","↑"]],"turns":{"P1061":"← ↓","P1063":"↓ →","P1067":"← ↑","P1069":"↑ →","P1073":"← ↓","P1075":"↓ →","P1079":"← ↑","P1081":"↑ →","P1085":"← ↓","P1089":"← ↑","P1091":"↑ →"}},{"title":"巷道 107 / 接驳区","cols":12,"upper":["P1143","P1095","P1144","P1099","Z5070","Z5003","Z5072","Z5007","Z5076","Z5077"],"lower":["P1122","P1148","P1123","P1101","Z5069","Z5001","Z5071","Z5005","Z5073","Z5074"],"lowerX":[0,1,2,3,4,5,6,7,8.15,9.45],"racks":[{"id":107,"left":1,"right":3,"out":["P1093","P1094"],"in":["P1097","P1098"]}],"vertical":[["P1095","P1148","↓"],["P1101","P1099","↑"],["Z5003","Z5001","↓"],["Z5005","Z5007","↑"]],"turns":{"P1095":"← ↓","P1148":"↓ →","P1099":"← ↑","P1101":"↑ →","Z5003":"← ↓","Z5001":"↓ →","Z5007":"← ↑","Z5005":"↑ →"},"rightBoundary":{"channel":"3P","area":0,"upper":"Z5009","lower":"Z5075"}}],"3P":[{"title":"接驳主线","cols":16,"upper":["Z5009","Z5078","Z5013","Z5081","Z5082","Z5017","Z5084","Z5021","Z5088","Z5089","Z5023","Z5090","Z5027","Z5093","Z5094","Z5031"],"lower":["Z5075","Z5011","Z5079","Z5080","Z5015","Z5083","Z5019","Z5085","Z5086","Z5087","Z5025","Z5091","Z5092","Z5029"],"lowerX":[0,2,3,4,5,6,7,8,9.333333333333334,10.666666666666666,12,13,14,15],"spans":{"Z5075":1.95,"Z5085":1.3333333333333333,"Z5086":1.3333333333333333,"Z5087":1.3333333333333333},"racks":[],"vertical":[["Z5011","Z5013","↑"],["Z5017","Z5015","↓"],["Z5019","Z5021","↑"],["Z5025","Z5027","↑"],["Z5031","Z5029","↓"]],"turns":{"Z5009":"← ↑","Z5013":"← ↑","Z5011":"↑ →","Z5017":"← ↓","Z5015":"↓ →","Z5021":"← ↑","Z5019":"↑ →","Z5023":"← ↓","Z5027":"← ↑","Z5025":"↑ →","Z5031":"← ↓","Z5029":"↓ →"},"leftBoundary":{"channel":"1P","area":2,"upper":"Z5077","lower":"Z5074"},"rightBoundary":{"channel":"3P","area":1,"upper":"Z5033","lower":"Z5095"},"upperTransfers":{"Z5023":"↓"}},{"title":"1号龙门 / 拆盘区","cols":14,"upper":["Z5033","Z5098","Z5037","Z5101","Z5102","Z5041","Z5104","Z5045","Z5107","Z5108","Z5049","Z5110","Z5053","Z5113"],"lower":["Z5095","Z5096","Z5035","Z5099","Z5100","Z5039","Z5103","Z5043","Z5105","Z5106","Z5047","Z5109","Z5051","Z5111"],"lowerX":[0,1,2,3,4,5,6,7,8,9,10,11,12,13],"racks":[],"vertical":[["Z5035","Z5037","↑"],["Z5041","Z5039","↓"],["Z5043","Z5045","↑"],["Z5049","Z5047","↓"],["Z5051","Z5053","↑"]],"turns":{"Z5033":"← ↓","Z5037":"← ↑","Z5035":"↑ →","Z5041":"← ↓","Z5039":"↓ →","Z5045":"← ↑","Z5043":"↑ →","Z5049":"← ↓","Z5047":"↓ →","Z5053":"← ↑","Z5051":"↑ →","P1004":"↓ →","P1007":"↑ →"},"branch":{"outFrom":"Z5039","inTo":"Z5043","outCol":5,"inCol":7,"out":["P1001","P1002","P1010","P1004"],"inTopDown":["P1011","P1150","P1009","P1007"],"bridge":"P1006","liftOut":"P1002","liftIn":"P1150","stripper":"P1010","gantry":"P1004"},"leftBoundary":{"channel":"3P","area":0,"upper":"Z5031","lower":"Z5029"},"rightBoundary":{"channel":"3P","area":2,"upper":"Z5114","lower":"下主线"}},{"title":"2号龙门 / 异常口","cols":10,"upper":["Z5114","Z5057","Z5116","Z5061","Z5119","Z5120","Z5067","Z5122"],"lower":["Z5111","Z5055","Z5115","Z5059","Z5063","Z5118","Z5065","Z5121"],"lowerX":[0,1,2,3,4,5,6,7],"racks":[],"vertical":[["Z5057","Z5055","↓"],["Z5059","Z5061","↑"],["Z5065","Z5067","↑"]],"turns":{"Z5057":"← ↓","Z5055":"↓ →","Z5061":"← ↑","Z5059":"↑ →","Z5063":"↓ →","Z5067":"← ↑","Z5065":"← ↑ →","Z5122":"↔","Z5121":"↔","P1015":"↓ →","P1018":"↑ →"},"branch":{"outFrom":"Z5063","inTo":"Z5065","outCol":4,"inCol":6,"out":["P1012","P1013","P1021","P1015"],"inTopDown":["P1022","P1151","P1020","P1018"],"bridge":"P1017","liftOut":"P1013","liftIn":"P1151","stripper":"P1021","gantry":"P1015"},"leftBoundary":{"channel":"3P","area":1,"upper":"Z5113","lower":"下主线"},"exceptionPorts":{"upper":"Z5122","lower":"Z5121","col":8},"reviewNotes":["Z5111 在原图第二、三页重复显示；下主线跨页边界编号待确认。"]}]};
+(() => {
+  const root = document.getElementById('pcr-preview');
+  const stage = document.getElementById('pcr-stage');
+  const content = root.querySelector('#pcr-content');
+  const keyboard = root.querySelector('#pcr-keyboard');
+  const names = ['主画面','设备布局','手动操作','设备状态','托盘数据','启停控制'];
+  const icons = ['house','layout-dashboard','hand','activity','database','power'];
+  const saved = window.openai?.widgetState?.privateContent || {};
+  let channel = ['1P','3P'].includes(saved.channel) ? saved.channel : '1P';
+  let page = names.includes(saved.page) ? saved.page : '设备布局';
+  const states = {
+    '1P': {device:'P1031',area:0,manual:false,running:false,paused:false,automatic:true,inputs:['P1031','','','']},
+    '3P': {device:'Z5009',area:0,manual:false,running:false,paused:false,automatic:true,inputs:['Z5009','','','']}
+  };
+  for (const ch of ['1P','3P']) {
+    const item = saved.channels?.[ch];
+    if (item?.device) { states[ch].device = String(item.device); states[ch].inputs[0] = String(item.device); }
+    if (Number.isInteger(item?.area)) states[ch].area = Math.max(0,Math.min(2,item.area));
+  }
+  if (saved.channel && saved.device) { states[channel].device=String(saved.device); states[channel].inputs[0]=String(saved.device); }
+  if (saved.channel && Number.isInteger(saved.area)) states[channel].area=Math.max(0,Math.min(2,saved.area));
+  const current = () => states[channel];
+  const feedback = text => root.querySelector('#pcr-feedback').textContent = text;
+  const readOnlyDevices = new Set(['P1002','P1010','P1013','P1021','P1150','P1151']);
+  const gantryWcs = {P1004:'P1005',P1015:'P1016'};
+  const statusWords = {P1031:1024,P1047:768,P1067:1024,P1075:1792,P1095:0,Z5003:1536,Z5009:1280,Z5017:1024,Z5023:768,Z5041:1024,Z5067:768,P1004:1280,P1015:1280,P1009:1280,P1020:256};
+  const devicePallets = new Map();
+  let previewScale=1, jog=null, hold=null, keyTarget=null, keyBuffer='', keyFresh=false, keyLimit=20, keyDrag=null;
+  function fitPreview() { previewScale=Math.min(1,stage.clientWidth/1280);root.style.transform=`scale(${previewScale})`;stage.style.height=(800*previewScale)+'px'; }
+  new ResizeObserver(fitPreview).observe(stage); fitPreview();
+  function bindings(ch=channel) {
+    return {
+      inputs:[1,2,3,4].map(i=>`HMI_Input_DeviceNo_${ch}_${i}`),
+      chooser:`AOI_HMI_ID_CHOOSE_${ch}`, status:`HMI_Status_Display_${ch}`, pallet:`HMI_PalletInfo_${ch}`,
+      manual:`HMI_Manual_${ch}`, start:`HMI_${ch}_Start`, stop:`HMI_${ch}_Stop`, reset:`ISB_Rst_HMI_${ch}`,
+      automatic:`AOI_HMI_OP_${ch}.HMI_Auto`, refresh:`HMI_MAN_DATA_Ref_${ch}`,
+      write:`HMI_PalletData_Chg_${ch}`, clear:`HMI_PalletData_Clr_${ch}`,
+      jog:{'A−':`HMI_Manaul_AC_Rev_${ch}`,'C＋':`HMI_Manaul_AC_Fwd_${ch}`,'B−':`HMI_Manaul_BD_Rev_${ch}`,'D＋':`HMI_Manaul_BD_Fwd_${ch}`,'上升':`HMI_Manaul_Up_${ch}`,'下降':`HMI_Manaul_Dn_${ch}`}
+    };
+  }
+  function statusTag(id) { const n=Number(id.slice(1));return id.startsWith('P')?`SCADA_P[1,${n%1000}].DeviceStatus`:`SCADA_Z5[${n%1000}].DeviceStatus`; }
+  function decoded(id=current().device) { const w=statusWords[id]??(256+(Number(id.slice(1))%3===0?1024:0));return {word:w,fault:!!(w&512),automatic:!!(w&256),loaded:!!(w&1024),mode:w&512?'fault':w&256?'auto':'manual',label:w&512?'故障':w&256?'自动':'手动'}; }
+  function numericId(id) { const n=Number(id.slice(1));return Number.isFinite(n)?(id.startsWith('P')?100000:500000)+n:0; }
+  function palletFor(id) {
+    if(!devicePallets.has(id)) {
+      const n=Number(id.slice(1))||0,loaded=decoded(id).loaded;
+      devicePallets.set(id,{SerialNO:loaded?26000000+n:0,Src_Device:loaded?numericId(id):0,Dest_Device:loaded?101029:0,PalletID:loaded?'PCR'+String(n).padStart(8,'0'):'',Height:loaded?1:0,Weight:loaded?386.5:0});
+    }
+    return devicePallets.get(id);
+  }
+  function simWrite(tag,value,message) { root.dataset.lastTag=tag;root.dataset.lastValue=String(value);if(message!==false)feedback(message||`模拟 · ${tag} = ${value}`); }
+  function pulse(tag,message) { simWrite(tag,1,message);setTimeout(()=>simWrite(tag,0,false),250); }
+  function remember() {
+    if(window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{page,device:current().device,channel,area:current().area},privateContent:{page,device:current().device,channel,area:current().area,channels:Object.fromEntries(Object.entries(states).map(([ch,s])=>[ch,{device:s.device,area:s.area}]))}}).catch(()=>{});
+  }
+  function escapeHtml(value) { return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  const panel=(title,body)=>`<section class="pcr-panel"><h3>${title}</h3>${body}</section>`;
+  const items=arr=>`<div class="pcr-items">${arr.map(([a,b])=>`<div><span>${a}</span><strong>${b}</strong></div>`).join('')}</div>`;
+  function select(value) {
+    if(!value) return;
+    release();const s=current();s.device=String(value);s.inputs[0]=String(value);s.paused=false;s.draft=null;
+    simWrite(bindings().inputs[0],value,`${channel} · 主查询 / 手动链条 1：${value}（模拟）`);
+    render();remember();
+  }
+  function switchChannel(ch,area) {
+    release();closeKeyboard();channel=ch;
+    if(Number.isInteger(area)) { current().area=area;page='设备布局'; }
+    root.querySelector('#pcr-modal').hidden=true;render();remember();
+    feedback(`${channel} 触摸屏 · 共用入库 PLC · 模拟预览`);
+  }
+  function layout() {
+    const s=current(),data=PCR_LAYOUTS[channel][s.area],is3=channel==='3P';
+    const total=(data.cols+(is3?2:.3))*64,base=is3?72:14,nodeW=58,positions={},nodes=[],links=[];
+    const upperY=is3?(data.branch?12:90):184,lowerY=is3?(data.branch?100:200):278;
+    function pos(id,col,y,dir,kind='') { const p={id,x:base+col*64,y,dir:data.turns[id]||dir,kind,w:nodeW+64*((data.spans?.[id]||1)-1)};positions[id]=p;nodes.push(p);return p; }
+    const connect=(a,b,dir)=>{if(a&&b)links.push({a,b,dir});};
+    data.upper.forEach((id,i)=>pos(id,data.upperX?.[i]??i,upperY,'←'));
+    data.lower.forEach((id,i)=>pos(id,data.lowerX[i],lowerY,'→'));
+    [data.upper,data.lower].forEach((ids,row)=>{for(let i=1;i<ids.length;i++)connect(positions[ids[i-1]],positions[ids[i]],row?'→':'←');});
+    data.vertical.forEach(([a,b,dir])=>connect(positions[a],positions[b],dir));
+    const racks=(data.racks||[]).map(r=>{
+      const out=r.out.map((id,i)=>pos(id,r.left,upperY-(r.out.length-i)*46,'↓'));
+      const ins=r.in.map((id,i)=>pos(id,r.right,upperY-(r.in.length-i)*46,'↑'));
+      const outEnd=positions[r.upperOut]||nodes.find(n=>n.y===upperY&&Math.abs(n.x-(base+r.left*64))<10);
+      const inEnd=positions[r.upperIn]||nodes.find(n=>n.y===upperY&&Math.abs(n.x-(base+r.right*64))<10);
+      [...out,outEnd].forEach((n,i,arr)=>{if(i)connect(arr[i-1],n,'↓');});
+      [...ins,inEnd].forEach((n,i,arr)=>{if(i)connect(arr[i-1],n,'↑');});
+      return `<div class="pcr-srm" style="left:${(base+(r.left+r.right)/2*64+16)/total*100}%;top:34px;height:132px">SRM${r.id}<span>堆垛机</span></div>`;
+    }).join('');
+    if(data.extra) { const arr=data.extra.ids.map((id,i)=>pos(id,data.extra.col,i*46,'↓','buffer'));[...arr,positions.P1055].forEach((n,i,all)=>{if(i)connect(all[i-1],n,'↓');}); }
+    let branchLabels='';
+    if(data.branch) {
+      const b=data.branch,out=b.out.map((id,i)=>pos(id,b.outCol,158+i*50,'↓','process')),ins=b.inTopDown.map((id,i)=>pos(id,b.inCol,158+i*50,'↑','process'));
+      const bridge=pos(b.bridge,(b.outCol+b.inCol)/2,308,'→','process');
+      connect(positions[b.outFrom],out[0],'↓');out.forEach((p,i)=>{if(i)connect(out[i-1],p,'↓');});
+      connect(out.at(-1),bridge,'→');connect(bridge,ins.at(-1),'→');
+      for(let i=ins.length-1;i>0;i--)connect(ins[i],ins[i-1],'↑');
+      connect(ins[0],positions[b.inTo],'↑');
+      const label=(id,text,inbound=false)=>{const p=positions[id];return `<div class="pcr-branch-label ${inbound?'inbound':''}" style="left:${(p.x+(inbound?p.w+7:-7))/total*100}%;top:${p.y+12}px">${text}</div>`;};
+      branchLabels=label(b.out[0],'空托盘 ↓')+label(b.liftOut,'升降机')+label(b.stripper,'拆盘机')+label(b.gantry,'龙门装盘位')+label(b.liftIn,'升降机',true)+label(b.inTopDown[2],'满盘扫码位',true);
+    }
+    const dockPairs=new Set();
+    data.vertical.forEach(([a,b,dir])=>{const p=positions[a],q=positions[b],upper=p.y<q.y?p:q,lower=p.y<q.y?q:p,middle=(upper.y+44+lower.y)/2;upper.boxY=upper.y;upper.boxHeight=middle-1-upper.y;upper.dock='dock-upper';upper.dockDir=dir;lower.boxY=middle+1;lower.boxHeight=lower.y+44-lower.boxY;lower.dock='dock-lower';lower.dockDir=dir;dockPairs.add([a,b].sort().join('|'));});
+    // Extend standalone transfer outlines without inventing a connection below.
+    Object.entries(data.upperTransfers||{}).forEach(([id,dir])=>{const p=positions[id];if(!p)return;p.boxY=p.y;p.boxHeight=(upperY+44+lowerY)/2-1-p.y;p.dock='dock-upper';p.dockDir=dir;});
+    const wires=links.map(({a,b,dir})=>{if(dockPairs.has([a.id,b.id].sort().join('|')))return '';if(a.y===b.y){const left=Math.min(a.x,b.x)+nodeW/2,right=Math.max(a.x,b.x)+nodeW/2;return `<div class="pcr-wire horizontal" style="left:${left/total*100}%;width:${(right-left)/total*100}%;top:${a.y+27}px"></div>`;}const top=Math.min(a.y,b.y)+27,bottom=Math.max(a.y,b.y)+27;return `<div class="pcr-wire vertical" style="left:${(a.x+nodeW/2)/total*100}%;top:${top}px;height:${bottom-top}px"><span>${dir}</span></div>`;}).join('');
+    const devices=nodes.map(n=>{const status=decoded(n.id),wcs=gantryWcs[n.id];return `<button class="pcr-machine mode-${status.mode} ${n.id===s.device?'selected':''} ${n.kind} ${n.dock||''}" data-device="${n.id}" data-status-tag="${statusTag(n.id)}" aria-label="${n.id}，${status.label}，${status.loaded?'有托盘':'无托盘'}${wcs?'，WCS点位'+wcs:''}，物流方向${n.dir}" style="left:${n.x/total*100}%;top:${n.boxY??n.y}px;width:${n.w/total*100}%;height:${n.boxHeight??44}px"><span class="pcr-machine-inner" style="top:${n.y-(n.boxY??n.y)}px"><strong>${n.id}</strong><span class="pcr-flow">${n.dock?n.dir.replace(/[↑↓]/g,'').trim():n.dir}</span><span class="pcr-status-dot ${status.loaded?'loaded':'empty'}" aria-hidden="true"></span></span>${n.dock?`<span class="pcr-dock-flow" aria-hidden="true">${n.dockDir}</span>`:''}</button>`;}).join('');
+    function boundary(meta,side) {
+      if(!meta)return '';
+      return [['upper',upperY,'←'],['lower',lowerY,'→']].map(([row,y,arrow])=>`<button class="pcr-handoff" data-channel="${meta.channel}" data-layout-area="${meta.area}" style="${side}:0;width:${(is3?64:78)/total*100}%;top:${y-11}px" aria-label="转到${meta.channel} ${PCR_LAYOUTS[meta.channel][meta.area].title}"><small>${meta.channel===channel?(side==='left'?'上一页':'下一页'):meta.channel+' 衔接'}</small><span>${arrow}</span><strong>${meta[row]}</strong></button>`).join('');
+    }
+    const fallbackLeft=!data.leftBoundary&&s.area>0?{channel,area:s.area-1,upper:'上主线',lower:'下主线'}:null;
+    const fallbackRight=!data.rightBoundary&&s.area<2?{channel,area:s.area+1,upper:'上主线',lower:'下主线'}:null;
+    const sideButtons=is3?boundary(data.leftBoundary,'left')+boundary(data.rightBoundary,'right'):(data.rightBoundary?boundary(data.rightBoundary,'right'):'')+(fallbackLeft?`<button class="pcr-boundary bottom" data-area="${s.area-1}">上一页 →</button>`:'')+(fallbackRight?`<button class="pcr-boundary right-bottom" data-area="${s.area+1}">下一页 →</button>`:'');
+    let ports='';
+    if(data.ports)ports='<div class="pcr-port upper">P1124 · 异常上下线口</div><div class="pcr-port lower">P1103 · 异常上下线口</div>';
+    if(data.exceptionPorts) {
+      const p=data.exceptionPorts;
+      ports=[['upper',upperY,p.upper],['lower',lowerY,p.lower]].map(([row,y,id])=>`<div class="pcr-port-info" style="left:${(base+p.col*64)/total*100}%;top:${y+1}px"><strong>异常 / 平库上下线口</strong><span>重量见托盘数据</span><span>${id}</span></div>`).join('');
+    }
+    return `<section class="pcr-panel pcr-layout-panel"><div class="pcr-row"><div class="pcr-tabs">${PCR_LAYOUTS[channel].map((x,i)=>`<button data-area="${i}" aria-pressed="${s.area===i}">${x.title}</button>`).join('')}</div></div><div class="pcr-topology ${data.branch?'has-branches':''}" data-layout-channel="${channel}" data-layout-index="${s.area}">${wires}${racks}${devices}${branchLabels}${ports}${sideButtons}</div><div class="pcr-row pcr-map-bottom"><div class="pcr-legend"><span><i class="pcr-status-swatch auto"></i>自动</span><span><i class="pcr-status-swatch manual"></i>手动</span><span><i class="pcr-status-swatch fault"></i>故障</span><span><i class="pcr-pallet-key filled"></i>有托盘</span><span><i class="pcr-pallet-key"></i>无托盘</span><span>PLC状态</span></div><div class="pcr-actions"><button data-go="设备状态">查看状态</button><button data-go="托盘数据">托盘数据</button><button class="pcr-primary" data-go="手动操作">手动操作</button></div></div></section>`;
+  }
+  const statusFields=[['总错误','HMI_fault',true],['链条过载','HMI_Fault_Link',true],['升降过载','HMI_Fault_UpDn',true],['上限信号','HMI_Fault_UpLim',true],['下限信号','HMI_Fault_DnLim',true],['移载过载','HMI_Fault_UpDn_Move',true],['运行超时','HMI_Fault_Run_TimeOut',true],['进件中','HMI_Stus_In'],['出件中','HMI_Stus_Out'],['上升中','HMI_Stus_Up'],['下降中','HMI_Stus_Dn'],['上位','HMI_Stus_UpDn_At_Up'],['下位','HMI_Stus_UpDn_At_Dn'],['入口光电','HMI_Stus_In_IPH'],['出口光电','HMI_Stus_Out_IPH'],['有盘无数据','HMI_Fault_HavePall_NoData',true],['有数据无盘','HMI_Fault_NoPall_HaveData',true],['被禁用','HMI_Fault_Forbid',true],['托盘检测异常','HMI_Fault_IPH_Err',true],['升降检测异常','HMI_Fault_IPX_Err',true]];
+  const palletFields=[['任务号','SerialNO','integer'],['源地址','Src_Device','integer'],['目标地址','Dest_Device','integer'],['托盘号','PalletID','text'],['外检状态','Height','integer'],['重量 / kg','Weight','decimal']];
+  function render() {
+    closeKeyboard();const s=current(),b=bindings(),status=decoded(),pallet=palletFor(s.device);
+    root.dataset.channel=channel;root.dataset.mode='live';root.dataset.layout=String(page==='设备布局');
+    root.querySelector('#pcr-nav').innerHTML=names.map((x,i)=>`<button data-page="${x}" ${page===x?'aria-current="page"':''}><i data-lucide="${icons[i]}" aria-hidden="true"></i>${x}</button>`).join('');
+    root.querySelector('#pcr-title').textContent=page;root.querySelector('#pcr-subtitle').textContent='入库输送系统 / '+channel;
+    root.querySelector('#pcr-channel-caption').textContent=channel+' 触摸屏 · 等待连接';root.querySelector('#pcr-channel-footer').textContent=channel+' 操作通道 · 共用入库 PLC';
+    root.querySelectorAll('[data-channel]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.channel===channel)));
+    root.querySelector('#pcr-device').value=s.device;root.querySelector('#pcr-device').dataset.plcTag=b.inputs[0];
+    root.querySelector('#pcr-selected').textContent='当前：'+s.device;
+    if(page==='设备布局')content.innerHTML=layout();
+    if(page==='主画面') content.innerHTML=`<div class="pcr-summary">${panel('连接状态',`<div class="pcr-big">${plcOnline?'PLC在线':'PLC未连接'}</div><div class="pcr-caption">入库 PLC · ${channel} 通道</div>`)}${panel('区域状态',`<div class="pcr-big">${s.running?'已启动':'已停止'}</div><div class="pcr-caption">${channel} 控制范围</div>`)}${panel('当前设备',`<div class="pcr-big">${s.device}</div><div class="pcr-caption">${status.label} · ${status.loaded?'有托盘':'无托盘'}</div>`)}</div>${panel('区域入口','<div class="pcr-actions" style="margin-top:20px"><button data-go="设备布局">进入设备布局 →</button><button data-go="手动操作">进入手动操作 →</button><button data-go="托盘数据">进入托盘数据 →</button></div>')}<div style="margin-top:18px">${panel('触摸屏通道',`<p class="pcr-caption">两组触摸屏共用入库 PLC，查询和操作标签按通道独立。</p><div class="pcr-actions" style="margin-top:16px"><button data-channel="1P">1P 触摸屏${channel==='1P'?' · 当前':''}</button><button data-channel="3P">3P 触摸屏${channel==='3P'?' · 当前':''}</button></div>`)}</div>`;
+    if(page==='手动操作') content.innerHTML=`<div class="pcr-grid pcr-manual-grid"><section class="pcr-panel"><div class="pcr-row"><h3>手动点动 · ${channel}</h3><button id="pcr-manual-mode" class="${s.manual?'pcr-primary':''}" data-plc-tag="${b.manual}">${s.manual?'手动已请求':'请求手动'}</button></div><div class="pcr-caption">按住运行 · 松开停止</div><div class="pcr-man-top" style="margin-top:12px"><label>手动链条 1<input id="pcr-man1" value="${escapeHtml(s.device)}" data-input-index="0" data-plc-tag="${b.inputs[0]}"></label><label>手动链条 2<input value="${escapeHtml(s.inputs[1])}" data-input-index="1" data-plc-tag="${b.inputs[1]}" placeholder="未选择"></label></div><div class="pcr-jog"><span></span><button data-jog="D＋" data-plc-tag="${b.jog['D＋']}">↑<small>D＋ / B→D</small></button><span></span><button data-jog="A−" data-plc-tag="${b.jog['A−']}">←<small>A− / C→A</small></button><div class="pcr-jog-center" id="pcr-jog-state">${s.manual?'等待点动':'请先请求手动'}</div><button data-jog="C＋" data-plc-tag="${b.jog['C＋']}">→<small>C＋ / A→C</small></button><span></span><button data-jog="B−" data-plc-tag="${b.jog['B−']}">↓<small>B− / D→B</small></button><span></span><button data-jog="上升" data-plc-tag="${b.jog['上升']}">↑<small>上升</small></button><span></span><button data-jog="下降" data-plc-tag="${b.jog['下降']}">↓<small>下降</small></button></div></section><div style="display:grid;gap:16px;align-content:start">${panel('PLC实际选择结果',items([['手动链条 1',numericId(s.device)],['手动链条 2',s.inputs[1]?numericId(s.inputs[1]):0],['托盘号',pallet.PalletID||'—'],...(gantryWcs[s.device]?[['WCS点位',gantryWcs[s.device]]]:[])]))}${panel('禁用链条编号',`<div class="pcr-man-top" style="margin:14px 0 0"><label>禁用链条 1<input value="${escapeHtml(s.inputs[2])}" data-input-index="2" data-plc-tag="${b.inputs[2]}" placeholder="未设置"></label><label>禁用链条 2<input value="${escapeHtml(s.inputs[3])}" data-input-index="3" data-plc-tag="${b.inputs[3]}" placeholder="未设置"></label></div>`)}</div></div>`;
+    if(page==='设备状态') content.innerHTML=`<section class="pcr-panel pcr-state-panel" data-plc-tag="${b.status}"><div class="pcr-row"><h3>设备状态 · ${escapeHtml(s.device)}</h3><span class="pcr-chip">${channel} · ${status.label}</span></div><div class="pcr-state-grid">${statusFields.map(([label,field,fault])=>{const active=fault?(status.fault&&['HMI_fault','HMI_Fault_Link'].includes(field)):(field==='HMI_Stus_UpDn_At_Dn'||field==='HMI_Stus_In_IPH'&&status.loaded);return `<div class="pcr-state ${!active?'inactive':''} ${fault&&active?'fault':''}" data-plc-tag="${b.status}.${field}">${label}<b>${fault?(active?'异常':'正常'):(active?'有效':'无效')}</b></div>`;}).join('')}</div><div class="pcr-actions pcr-state-actions"><button data-action="clear-in" data-plc-tag="${b.status}.HMI_Clr_In">清进件命令</button><button data-action="clear-out" data-plc-tag="${b.status}.HMI_Clr_Out">清出件命令</button></div></section>`;
+    if(page==='托盘数据') { const values=s.paused?s.draft:pallet;content.innerHTML=`<div class="pcr-grid" style="grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)"><section class="pcr-panel"><div class="pcr-row"><h3>托盘信息 · ${escapeHtml(s.device)}</h3><span class="pcr-chip">${s.paused?'已停止刷新':'PLC刷新中'}</span></div><div class="pcr-fields">${palletFields.map(([label,field,kind])=>`<label>${label}<input value="${escapeHtml(values[field])}" data-pallet-field="${field}" data-vk-kind="${kind}" data-plc-tag="${b.pallet}.${field}" ${s.paused?'':'readonly'}></label>`).join('')}</div>${gantryWcs[s.device]?`<p class="pcr-note">链条移栽机 ${s.device} · WCS交互点位 ${gantryWcs[s.device]}</p>`:''}</section><section class="pcr-panel pcr-data-actions"><h3>数据维护 · ${channel}</h3><button id="pcr-refresh" data-plc-tag="${b.refresh}">${s.paused?'恢复数据刷新':'停止数据刷新'}</button><button class="pcr-primary" data-hold="写入" data-plc-tag="${b.write}" >写入</button><button class="pcr-danger" data-hold="清除" data-plc-tag="${b.clear}" >清除</button><p class="pcr-note">停止刷新 → 编辑 → 写入 → 恢复刷新。<br>写入/清除：按下置1，松开置0，由PLC处理。</p></section></div>`; }
+    if(page==='启停控制') content.innerHTML=`<section class="pcr-panel"><div class="pcr-row"><div><h3>${channel} 区域控制</h3><p class="pcr-caption">当前状态：${s.running?'已启动':'已停止'}</p></div><span class="pcr-chip">● ${plcValues['AOI_HMI_OP_'+channel+'.HMI_EM']===undefined?'许可未读取':plcValues['AOI_HMI_OP_'+channel+'.HMI_EM']?'操作许可正常':'操作许可未满足'}</span></div><div class="pcr-items"><div><span>区域自动使能</span><label><input id="pcr-auto" type="checkbox" ${s.automatic?'checked':''} data-plc-tag="${b.automatic}" style="width:22px;min-height:22px"> 已启用</label></div></div><div class="pcr-run-buttons"><button class="pcr-primary" id="pcr-start" data-plc-tag="${b.start}">启动</button><button class="pcr-danger" id="pcr-stop" data-plc-tag="${b.stop}">停止</button><button data-action="reset" data-plc-tag="${b.reset}">复位</button></div><p class="pcr-note" style="margin-top:22px">区域启停作用于 ${channel} 控制范围，共用入库 PLC。</p></section>`;
+    if(page==='手动操作'&&readOnlyDevices.has(s.device)) {content.querySelectorAll('[data-jog],#pcr-manual-mode').forEach(el=>el.disabled=true);content.querySelector('#pcr-jog-state').textContent='此设备仅查看状态';}
+    configureInputs();
+    if(globalThis.lucide)lucide.createIcons({attrs:{width:19,height:19}});
+  }
+  function closeKeyboard() { if(keyTarget)keyTarget.removeAttribute('data-vk-active');keyTarget=null;keyboard.hidden=true; }
+  function configureInputs() { root.querySelectorAll('input').forEach(input=>{if(input.type==='checkbox')return;const label=(input.closest('label')?.textContent||input.getAttribute('aria-label')||'输入内容').trim();input.dataset.vkEnabled=String(!(page==='托盘数据'&&content.contains(input)&&!current().paused));input.dataset.vkLabel=label;input.dataset.vkKind=input.dataset.vkKind||(/任务号|源地址|目标地址|外检状态/.test(label)?'integer':/重量/.test(label)?'decimal':'text');input.readOnly=true;input.inputMode='none';input.autocomplete='off';input.spellcheck=false;}); }
+  function updateKeyDisplay() { root.querySelector('#pcr-key-value').textContent=keyBuffer||' ';root.querySelector('#pcr-key-count').textContent=keyBuffer.length+' / '+keyLimit;root.querySelector('#pcr-key-value').style.background=keyFresh?'var(--p-soft)':'transparent'; }
+  function openKeyboard(input) {
+    closeKeyboard();keyTarget=input;keyBuffer=input.value;keyFresh=true;keyLimit=input.maxLength>0?input.maxLength:20;
+    const numeric=input.dataset.vkKind!=='text';keyboard.classList.toggle('numeric',numeric);root.querySelector('#pcr-key-keys').classList.toggle('numeric',numeric);root.querySelector('#pcr-key-title').textContent=input.dataset.vkLabel;
+    const keys=numeric?(input.dataset.vkKind==='decimal'?'789456123-0.':'7894561230'):'1234567890QWERTYUIOPASDFGHJKLZXCVBNM-_';
+    root.querySelector('#pcr-key-keys').innerHTML=Array.from(keys).map(k=>`<button type="button" data-key-char="${k}">${k}</button>`).join('');keyboard.classList.remove('compact');keyboard.hidden=false;
+    const rect=input.getBoundingClientRect(),bounds=root.getBoundingClientRect(),gap=12,margin=12,anchor={left:(rect.left-bounds.left)/previewScale,right:(rect.right-bounds.left)/previewScale,top:(rect.top-bounds.top)/previewScale,bottom:(rect.bottom-bounds.top)/previewScale};
+    const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+    const place=()=>{const w=keyboard.offsetWidth,h=keyboard.offsetHeight,x=clamp(anchor.left,margin,1280-w-margin),y=clamp(anchor.top,margin,800-h-margin);if(anchor.bottom+gap+h<=800-margin)return{x,y:anchor.bottom+gap};if(anchor.top-gap-h>=margin)return{x,y:anchor.top-gap-h};if(anchor.right+gap+w<=1280-margin)return{x:anchor.right+gap,y};if(anchor.left-gap-w>=margin)return{x:anchor.left-gap-w,y};return null;};
+    let position=place();if(!position){keyboard.classList.add('compact');position=place();}if(!position)position={x:clamp(anchor.left,margin,1280-keyboard.offsetWidth-margin),y:clamp(anchor.bottom+gap,margin,800-keyboard.offsetHeight-margin)};
+    keyboard.style.left=position.x+'px';keyboard.style.top=position.y+'px';keyboard.style.right='auto';keyboard.style.bottom='auto';input.setAttribute('data-vk-active','true');input.blur();updateKeyDisplay();
+  }
+  function release(showFeedback=true) {
+    if(jog) {simWrite(jog.tag,0,showFeedback?`模拟 · ${jog.channel} 点动已停止`:false);jog.button.classList.remove('pressed');jog=null;const state=content.querySelector('#pcr-jog-state');if(state)state.textContent='等待点动';}
+    if(hold) {clearTimeout(hold.timer);hold.button.textContent=hold.label;hold=null;}
+  }
+  root.querySelector('#pcr-key-close').onclick=closeKeyboard;
+  root.querySelector('#pcr-query').onclick=()=>select(root.querySelector('#pcr-device').value);
+  root.querySelector('#pcr-connection').onclick=()=>root.querySelector('#pcr-modal').hidden=false;
+  root.querySelector('#pcr-close').onclick=()=>root.querySelector('#pcr-modal').hidden=true;
+  root.querySelector('#pcr-inbound').onclick=()=>{root.querySelector('#pcr-modal').hidden=true;feedback('入库 PLC · '+channel+' · 等待连接');};
+  keyboard.addEventListener('click',event=>{
+    const button=event.target.closest('button');if(!button)return;
+    if(button.dataset.keyChar!==undefined) {const next=(keyFresh?'':keyBuffer)+button.dataset.keyChar,kind=keyTarget?.dataset.vkKind;if(kind==='integer'&&!/^\d*$/.test(next)||kind==='decimal'&&!/^-?\d*\.?\d*$/.test(next))return;if(next.length<=keyLimit){keyBuffer=next;keyFresh=false;updateKeyDisplay();}}
+    const action=button.dataset.keyAction;
+    if(action==='clear'){keyBuffer='';keyFresh=false;updateKeyDisplay();}if(action==='backspace'){keyBuffer=keyFresh?'':keyBuffer.slice(0,-1);keyFresh=false;updateKeyDisplay();}if(action==='cancel')closeKeyboard();
+    if(action==='confirm'&&keyTarget) {const target=keyTarget,value=keyBuffer;target.value=value;closeKeyboard();if(target.id==='pcr-device'||target.id==='pcr-man1')select(value);else if(target.dataset.inputIndex){current().inputs[Number(target.dataset.inputIndex)]=value;simWrite(target.dataset.plcTag,value);render();}else if(target.dataset.palletField){const key=target.dataset.palletField;current().draft[key]=key==='PalletID'?value:Number(value);simWrite(target.dataset.plcTag,value);}}
+  });
+  const handle=root.querySelector('#pcr-key-handle');
+  handle.addEventListener('pointerdown',event=>{if(event.target.closest('button'))return;const box=keyboard.getBoundingClientRect(),base=root.getBoundingClientRect();keyDrag={x:event.clientX,y:event.clientY,left:(box.left-base.left)/previewScale,top:(box.top-base.top)/previewScale};handle.setPointerCapture(event.pointerId);event.preventDefault();});
+  handle.addEventListener('pointermove',event=>{if(!keyDrag)return;keyboard.style.left=Math.max(8,Math.min(1280-keyboard.offsetWidth-8,keyDrag.left+(event.clientX-keyDrag.x)/previewScale))+'px';keyboard.style.top=Math.max(8,Math.min(800-keyboard.offsetHeight-8,keyDrag.top+(event.clientY-keyDrag.y)/previewScale))+'px';});
+  handle.addEventListener('pointerup',()=>keyDrag=null);handle.addEventListener('pointercancel',()=>keyDrag=null);
+  root.addEventListener('pointerdown',event=>{
+    const input=event.target.closest('input[data-vk-enabled="true"]');if(input){event.preventDefault();openKeyboard(input);return;}
+    const button=event.target.closest('button');if(!button||button.disabled)return;
+    if(button.dataset.jog) {if(!current().manual){feedback('请先请求手动');return;}jog={button,channel,tag:bindings().jog[button.dataset.jog]};button.classList.add('pressed');button.setPointerCapture(event.pointerId);content.querySelector('#pcr-jog-state').textContent=button.dataset.jog+' 点动中';simWrite(jog.tag,1);}
+    if(button.dataset.hold) {const label=button.textContent;button.textContent='保持按住…';button.setPointerCapture(event.pointerId);const activeChannel=channel;hold={button,label,timer:setTimeout(()=>{if(channel!==activeChannel||!current().paused)return;const s=current(),draft=s.draft;if(button.dataset.hold==='写入'&&(!Number(draft.Dest_Device)||!draft.PalletID.trim())){feedback('目标地址和托盘号不能为空');button.textContent=label;hold=null;return;}if(button.dataset.hold==='写入'&&draft.Weight!==0&&(draft.Weight<50||draft.Weight>600)){feedback('重量有效范围为50～600 kg');button.textContent=label;hold=null;return;}if(button.dataset.hold==='写入')devicePallets.set(s.device,{...draft});else {s.draft={SerialNO:0,Src_Device:0,Dest_Device:0,PalletID:'',Height:0,Weight:0};devicePallets.set(s.device,{...s.draft});}pulse(button.dataset.plcTag,`模拟 · ${channel} 托盘数据${button.dataset.hold}请求`);hold=null;render();},3000)};}
+  });
+  root.addEventListener('click',event=>{
+    const button=event.target.closest('button');if(!button||button.disabled)return;
+    if(button.dataset.channel){switchChannel(button.dataset.channel,button.dataset.layoutArea!==undefined?Number(button.dataset.layoutArea):undefined);return;}
+    if(button.dataset.page||button.dataset.go){release();page=button.dataset.page||button.dataset.go;render();remember();return;}
+    if(button.dataset.device){select(button.dataset.device);return;}
+    if(button.dataset.area!==undefined){release();current().area=Number(button.dataset.area);render();remember();return;}
+    const s=current(),b=bindings();
+    if(button.id==='pcr-manual-mode'){s.manual=!s.manual;simWrite(b.manual,s.manual?1:0);render();}
+    if(button.id==='pcr-refresh'){s.paused=!s.paused;s.draft=s.paused?{...palletFor(s.device)}:null;simWrite(b.refresh,s.paused?1:0);render();}
+    if(button.id==='pcr-start'||button.id==='pcr-stop'){s.running=button.id==='pcr-start';pulse(s.running?b.start:b.stop,`模拟 · ${channel} 已${s.running?'启动':'停止'}`);render();}
+    if(button.dataset.action==='reset')pulse(b.reset,`模拟 · ${channel} 复位请求`);
+    if(button.dataset.action==='clear-in')pulse(b.status+'.HMI_Clr_In',`模拟 · ${channel} 清进件命令`);
+    if(button.dataset.action==='clear-out')pulse(b.status+'.HMI_Clr_Out',`模拟 · ${channel} 清出件命令`);
+  });
+  root.addEventListener('change',event=>{if(event.target.id==='pcr-auto'){current().automatic=event.target.checked;simWrite(bindings().automatic,event.target.checked?1:0);}});
+  root.addEventListener('keydown',event=>{const input=event.target.closest('input[data-vk-enabled="true"]');if(input&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openKeyboard(input);}if(event.key==='Escape')closeKeyboard();});
+  root.addEventListener('pointerup',()=>release());root.addEventListener('pointercancel',()=>release());window.addEventListener('blur',()=>release());document.addEventListener('visibilitychange',()=>{if(document.hidden)release();});
+  window.addEventListener('openai:set_globals',event=>{const state=event.detail?.globals?.widgetState?.privateContent;if(!state||!['1P','3P'].includes(state.channel))return;release(false);channel=state.channel;if(names.includes(state.page))page=state.page;if(state.device){current().device=String(state.device);current().inputs[0]=String(state.device);}if(Number.isInteger(state.area))current().area=Math.max(0,Math.min(2,state.area));render();});
+  // Runs inside the approved controller closure; preview-only actions are intercepted.
+  const PLC_HOST='192.168.41.129';
+  let plcOnline=false,readBusy=false,sequence=0,writeChain=Promise.resolve();
+  const plcValues={},pending=new Map(),requests=new Map(),excluded=new Set(['P3248','P3249','P3250','P3251']);
+  const types={SerialNO:'DINT',Src_Device:'DINT',Dest_Device:'DINT',Height:'INT',Weight:'REAL',PalletNum:'INT',MajorState:'SINT',SubState:'SINT',Device:'DINT'};
+  const parse=s=>typeof s==='string'?JSON.parse(s):s;
+  function request(tag,type,value) {
+    if(!plcOnline)return Promise.reject(Error('PLC未连接'));
+    const id=String(++sequence);
+    return new Promise((resolve,reject)=>{
+      const timer=setTimeout(()=>{pending.delete(id);reject(Error('写入响应超时：'+tag));},10000);
+      pending.set(id,{resolve:r=>{clearTimeout(timer);resolve(r);},reject:e=>{clearTimeout(timer);reject(e);}});
+      if(type==='STR20')AndroidPlc.writeString(id,tag,String(value));else AndroidPlc.writeTag(id,tag,type,String(value));
+    });
+  }
+  function send(tag,type,value,message) {
+    const task=writeChain.then(()=>request(tag,type,value));
+    writeChain=task.catch(()=>{});
+    task.then(()=>{if(message)feedback(message);}).catch(e=>feedback(e.message));
+    return task;
+  }
+  function readString(base) {
+    if(plcValues[base+'.LEN']===undefined)return '';
+    const len=Math.max(0,Math.min(20,Number(plcValues[base+'.LEN'])));
+    return Array.from({length:len},(_,i)=>String.fromCharCode(Number(plcValues[base+'.DATA['+i+']']||0)&255)).join('');
+  }
+  decoded=function(id=current().device) {
+    const word=excluded.has(id)?undefined:plcValues[statusTag(id)];
+    if(word===undefined)return {word:0,fault:false,automatic:false,loaded:false,mode:'unknown',label:excluded.has(id)?'出库PLC待接入':'未读取'};
+    return {word,fault:!!(word&512),automatic:!!(word&256),loaded:!!(word&1024),mode:word&512?'fault':word&256?'auto':'manual',label:word&512?'故障':word&256?'自动':'手动'};
+  };
+  palletFor=function() {
+    const p=bindings().pallet;
+    return {SerialNO:plcValues[p+'.SerialNO']??'',Src_Device:plcValues[p+'.Src_Device']??'',Dest_Device:plcValues[p+'.Dest_Device']??'',PalletID:readString(p+'.PalletID'),Height:plcValues[p+'.Height']??'',Weight:plcValues[p+'.Weight']??''};
+  };
+  numericId=function(id) {return plcValues[bindings().chooser+(id===current().device?'.HMI_Man_No1':'.HMI_Man_No2')]??'未读取';};
+  // Disable all preview write fallbacks in the packaged app.
+  simWrite=function(){throw Error('预览写入路径不可用于在线操作');};
+  pulse=async function(tag,message) {
+    try {await send(tag,'BOOL',1);await new Promise(r=>setTimeout(r,300));}
+    finally {await send(tag,'BOOL',0);}
+    feedback(message||'请求已发送，以PLC回读为准');poll();
+  };
+  select=async function(value) {
+    if(excluded.has(value)){feedback(value+' 属于出库PLC，暂不接入');return;}
+    if(!plcOnline){feedback('请先连接入库PLC');return;}
+    release(false);closeKeyboard();const s=current(),b=bindings();
+    if(s.paused){feedback('请先恢复托盘数据刷新，再切换查询对象');return;}
+    try{await send(b.inputs[0],'STR20',value);s.device=value;s.inputs[0]=value;render();poll();feedback('查询编号已发送，等待PLC实际选择回读');}catch(e){feedback(e.message);}
+  };
+  switchChannel=function(ch,area) {
+    release(false);closeKeyboard();channel=ch;
+    if(Number.isInteger(area)){current().area=area;page='设备布局';}
+    root.querySelector('#pcr-modal').hidden=true;render();poll();
+  };
+  release=function(showFeedback=true) {
+    if(jog){const active=jog;jog=null;active.button.classList.remove('pressed');send(active.tag,'BOOL',0,showFeedback?'点动停止请求已发送':null).catch(()=>{});}
+    if(hold){const active=hold;hold=null;active.button.classList.remove('pressed');send(active.tag,'BOOL',0).catch(()=>{});}
+  };
+  const draw=render;
+  render=function(){
+    draw();
+    if(page==='手动操作') {
+      const b=bindings(),side=content.querySelector('.pcr-manual-grid > div');
+      if(side)side.insertAdjacentHTML('beforeend',panel('升降到位',`<div style="display:flex;gap:20px;margin-top:12px">${[['上升到位','HMI_Stus_UpDn_At_Up'],['下降到位','HMI_Stus_UpDn_At_Dn']].map(([label,field])=>`<div class="pcr-arrival" data-arrival-tag="${b.status}.${field}" style="display:flex;align-items:center;gap:8px"><i style="width:12px;height:12px;flex-shrink:0;border-radius:50%;background:#a8b3c0"></i><span>${label}</span><b style="font-size:12px">未读取</b></div>`).join('')}</div>`));
+    }
+    paint();
+  };
+  function paint() {
+    const s=current(),b=bindings();
+    root.querySelector('#pcr-channel-caption').textContent=channel+' · '+(plcOnline?PLC_HOST:'未连接');
+    root.querySelector('.pcr-head-right .pcr-chip').textContent=plcOnline?'● PLC在线':'● PLC未连接';
+    const selected=plcValues[b.chooser+'.HMI_Man_No1'];
+    root.querySelector('#pcr-selected').textContent='PLC实际选择：'+(selected??'未读取');
+    for(const el of root.querySelectorAll('.pcr-machine')) {
+      const st=decoded(el.dataset.device);el.classList.remove('mode-auto','mode-manual','mode-fault','mode-unknown');el.classList.add('mode-'+st.mode);
+      el.querySelector('.pcr-status-dot')?.classList.toggle('loaded',st.loaded);
+      el.title=st.label;el.disabled=excluded.has(el.dataset.device);
+    }
+    for(const el of content.querySelectorAll('.pcr-state[data-plc-tag]')) {
+      const v=plcValues[el.dataset.plcTag],fault=el.dataset.plcTag.includes('Fault')||el.dataset.plcTag.endsWith('.HMI_fault');
+      el.querySelector('b').textContent=v===undefined?'未读取':fault?(v?'异常':'正常'):(v?'有效':'无效');
+      el.classList.toggle('inactive',v===undefined||!v);el.classList.toggle('fault',fault&&!!v);
+    }
+    if(page==='托盘数据'&&!s.paused)for(const el of content.querySelectorAll('[data-pallet-field]'))el.value=palletFor()[el.dataset.palletField];
+    if(page==='手动操作') {
+      for(const el of content.querySelectorAll('[data-arrival-tag]')) {
+        const value=plcValues[el.dataset.arrivalTag];
+        el.querySelector('i').style.background=value===undefined?'#a8b3c0':value?'#16a34a':'#cbd5e1';
+        el.querySelector('b').textContent=value===undefined?'未读取':value?'已到位':'未到位';
+      }
+      const fields=content.querySelectorAll('.pcr-items strong');
+      if(fields[0])fields[0].textContent=selected??'未读取';if(fields[1])fields[1].textContent=plcValues[b.chooser+'.HMI_Man_No2']??'未读取';
+      const btn=content.querySelector('#pcr-manual-mode');if(btn)btn.textContent=s.manual?'手动已请求':'请求手动';
+    }
+  }
+  function poll() {
+    if(!plcOnline||readBusy)return;
+    const tags=new Map(),b=bindings(),add=(tag,type)=>tags.set(tag,{tag,type});
+    for(const field of ['HMI_Auto','HMI_Man','HMI_Start','HMI_EM'])add('AOI_HMI_OP_'+channel+'.'+field,'BOOL');
+    add(b.manual,'BOOL');add(b.refresh,'BOOL');add(b.chooser+'.HMI_Man_No1','DINT');add(b.chooser+'.HMI_Man_No2','DINT');
+    add('HMI_ZoneP1_Alarming','BOOL');add('HMI_ZoneZ5_Alarming','BOOL');
+    if(page==='设备布局')for(const el of root.querySelectorAll('.pcr-machine'))if(!excluded.has(el.dataset.device))add(statusTag(el.dataset.device),'INT');
+    if(!excluded.has(current().device)&&/^[PZ]\d{4}$/.test(current().device))add(statusTag(current().device),'INT');
+    if(page==='设备状态')for(const [,f]of statusFields)add(b.status+'.'+f,'BOOL');
+    if(page==='手动操作')for(const field of ['HMI_Stus_UpDn_At_Up','HMI_Stus_UpDn_At_Dn'])add(b.status+'.'+field,'BOOL');
+    if(page==='托盘数据'||page==='手动操作') {
+      for(const [field,type]of Object.entries(types))add(b.pallet+'.'+field,type);
+      add(b.pallet+'.PalletID.LEN','DINT');for(let i=0;i<20;i++)add(b.pallet+'.PalletID.DATA['+i+']','SINT');
+    }
+    const id=String(++sequence);requests.set(id,{channel,page});readBusy=true;AndroidPlc.readTags(id,JSON.stringify([...tags.values()]));
+  }
+  window.onNativeConnected=function(json) {
+    const r=parse(json);plcOnline=!!r.ok;readBusy=false;root.querySelector('#pcr-modal').hidden=true;render();feedback(r.message);if(plcOnline)poll();
+  };
+  window.onNativeDisconnected=function(){plcOnline=false;readBusy=false;render();feedback('PLC已断开');};
+  window.onNativeWrite=function(json){const r=parse(json),p=pending.get(r.requestId);if(p){pending.delete(r.requestId);r.ok?p.resolve(r):p.reject(Error(r.tag+'：'+r.message));}};
+  window.onNativeRead=function(json) {
+    const r=parse(json),context=requests.get(r.requestId);requests.delete(r.requestId);readBusy=false;
+    Object.assign(plcValues,r.values||{});
+    if(context){const ch=context.channel,s=states[ch];s.manual=!!plcValues['HMI_Manual_'+ch];s.paused=!!plcValues['HMI_MAN_DATA_Ref_'+ch];s.automatic=!!plcValues['AOI_HMI_OP_'+ch+'.HMI_Auto'];s.running=!!plcValues['AOI_HMI_OP_'+ch+'.HMI_Start'];if(s.paused&&!s.draft&&ch===channel)s.draft={...palletFor()};}
+    if(!jog&&!hold&&keyboard.hidden&&(page==='主画面'||page==='启停控制'))render();else paint();
+    if(r.errors&&Object.keys(r.errors).length){for(const tag of Object.keys(r.errors))delete plcValues[tag];feedback('读取失败：'+Object.entries(r.errors).slice(0,2).map(([k,v])=>k+' '+v).join('；'));paint();}
+  };
+  // Capture real controls and suppress their preview counterparts.
+  root.addEventListener('click',async event=>{
+    const button=event.target.closest('button');if(!button||button.disabled)return;
+    const key=button.dataset.keyAction;
+    if(key==='confirm'&&keyTarget){
+      event.stopImmediatePropagation();const target=keyTarget,value=keyBuffer;closeKeyboard();
+      if(target.id==='pcr-device'||target.id==='pcr-man1'){await select(value);return;}
+      try {
+        if(target.dataset.inputIndex){await send(target.dataset.plcTag,'STR20',value);current().inputs[Number(target.dataset.inputIndex)]=value;render();}
+        else if(target.dataset.palletField){const f=target.dataset.palletField;if(!current().paused)throw Error('请先停止数据刷新');if(f==='PalletID'&&value.length>20)throw Error('托盘号最多20字符');if(f!=='PalletID'&&(!value.trim()||!Number.isFinite(Number(value))))throw Error('请输入有效数字');await send(target.dataset.plcTag,f==='PalletID'?'STR20':types[f],value);current().draft[f]=f==='PalletID'?value:Number(value);target.value=value;feedback('缓冲字段已写入，尚未提交整盘');}
+      }catch(e){feedback(e.message);}return;
+    }
+    if(button.id==='pcr-inbound'){event.stopImmediatePropagation();feedback('正在连接 '+PLC_HOST);AndroidPlc.connect(PLC_HOST);return;}
+    const action=button.dataset.action;
+    if(!['pcr-manual-mode','pcr-refresh','pcr-start','pcr-stop'].includes(button.id)&&!action)return;
+    event.stopImmediatePropagation();if(!plcOnline){feedback('请先连接PLC');return;}
+    const s=current(),b=bindings();
+    try {
+      if(button.id==='pcr-manual-mode'){release(false);await send(b.manual,'BOOL',s.manual?0:1);}
+      if(button.id==='pcr-refresh'){const next=!s.paused;if(next)s.draft={...palletFor()};await send(b.refresh,'BOOL',next?1:0);s.paused=next;render();}
+      if(button.id==='pcr-start'||button.id==='pcr-stop')await pulse(button.id==='pcr-start'?b.start:b.stop);
+      if(action==='reset')await pulse(b.reset);
+      if(action==='clear-in'||action==='clear-out')await pulse(b.status+(action==='clear-in'?'.HMI_Clr_In':'.HMI_Clr_Out'));
+      poll();
+    }catch(e){feedback(e.message);}
+  },true);
+  root.addEventListener('change',event=>{if(event.target.id==='pcr-auto'){event.stopImmediatePropagation();send(bindings().automatic,'BOOL',event.target.checked?1:0).then(poll).catch(()=>{});}},true);
+  root.addEventListener('pointerdown',event=>{
+    const button=event.target.closest('button');if(!button||button.disabled||(!button.dataset.jog&&!button.dataset.hold))return;
+    event.stopImmediatePropagation();if(!plcOnline){feedback('请先连接PLC');return;}
+    if(button.dataset.jog){
+      if(jog||!current().manual){feedback('请先请求手动');return;}
+      const active={button,channel,tag:bindings().jog[button.dataset.jog]};jog=active;button.setPointerCapture(event.pointerId);button.classList.add('pressed');send(active.tag,'BOOL',1).catch(()=>{if(jog===active)release(false);});
+    }else{
+      if(hold)return;
+      const active={button,channel,tag:button.dataset.plcTag};hold=active;
+      button.setPointerCapture(event.pointerId);button.classList.add('pressed');
+      send(active.tag,'BOOL',1).catch(()=>{if(hold===active)release(false);});
+    }
+  },true);
+  window.addEventListener('pagehide',()=>release(false));
+  setInterval(poll,1000);
+  const fit=()=>{previewScale=Math.min(innerWidth/1280,innerHeight/800);root.style.transform=`scale(${previewScale})`;stage.style.height=800*previewScale+'px';};
+  new ResizeObserver(fit).observe(stage);fit();
+  render();feedback('准备连接入库PLC '+PLC_HOST);AndroidPlc.connect(PLC_HOST);
+
+})();
+</script></body></html>
